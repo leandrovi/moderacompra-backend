@@ -2,10 +2,10 @@
   "name": "moderacompra-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
+  "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
