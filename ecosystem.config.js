@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   apps : [{
     name: "moderacompra-backend",
     script: "./src/server.js",
