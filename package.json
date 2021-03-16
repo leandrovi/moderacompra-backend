@@ -2,10 +2,12 @@
   "name": "moderacompra-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "./src/server.js",
   "type": "module",
   "scripts": {
-    "start": "node server.js"
+    "dev": "node ./src/server.js",
+    "heroku-prebuild": "npm install pm2 -g",
+    "start": "pm2-runtime start ecosystem.config.js --env production"
   },
   "keywords": [],
   "author": "",
