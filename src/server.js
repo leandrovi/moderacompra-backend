@@ -3,5 +3,5 @@
 import app from './app.js';
 
 app.listen(process.env.PORT || 3000, () => {
-  console.log('🚀 ModeraCompra server is running!')
+  console.log('🚀 Modera Compra server is running!')
 });
