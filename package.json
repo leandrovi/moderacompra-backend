@@ -5,7 +5,7 @@
   "main": "./src/server.js",
   "type": "module",
   "scripts": {
-    "dev": "node ./src/server.js",
+    "dev": "nodemon ./src/server.js",
     "heroku-prebuild": "npm install pm2 -g",
     "start": "pm2-runtime start ./src/server.js --env production"
   },
@@ -14,5 +14,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
   }
 }
