@@ -5,9 +5,12 @@
   "main": "./src/server.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon ./src/server.js",
+    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts",
+    "postinstall": "tsc",
+    "watch-node": "nodemon dist/index.js",
+    "watch-ts": "tsc -w",
     "heroku-prebuild": "npm install pm2 -g",
-    "start": "pm2-runtime start ./src/server.js --env production"
+    "start": "pm2-runtime start ./dist/server.js --env production"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +19,19 @@
     "express": "^4.17.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.7"
+    "@types/express": "^4.17.11",
+    "@types/node": "^14.14.35",
+    "@typescript-eslint/eslint-plugin": "^4.18.0",
+    "@typescript-eslint/parser": "^4.18.0",
+    "eslint": "^7.22.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-promise": "^4.3.1",
+    "prettier": "^2.2.1",
+    "ts-node-dev": "^1.1.6",
+    "typescript": "^4.2.3"
   }
 }
