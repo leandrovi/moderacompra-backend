@@ -6,8 +6,11 @@
   "type": "module",
   "scripts": {
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts",
+    "postinstall": "tsc",
+    "watch-node": "nodemon dist/index.js",
+    "watch-ts": "tsc -w",
     "heroku-prebuild": "npm install pm2 -g",
-    "start": "pm2-runtime start ./src/server.js --env production"
+    "start": "pm2-runtime start ./dist/server.js --env production"
   },
   "keywords": [],
   "author": "",
