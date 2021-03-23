@@ -1,11 +1,12 @@
-import express, { Request, Response } from "express";
+import express from "express";
+import ListController from "./controllers/ListController";
+
+const listController = new ListController();
 
 const app = express();
 
 app.use(express.json());
 
-app.get("/", (req: Request, res: Response) =>
-  res.status(200).json({ message: "Hello World!" })
-);
+app.get("/", listController.create);
 
 export default app;
