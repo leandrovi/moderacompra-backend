@@ -7,6 +7,17 @@ const app = express();
 
 app.use(express.json());
 
-app.get("/", listController.create);
+// Lists
+app.get("/list", listController.create);
+
+// Products
+app.get("/products", (req, res) => {
+  return res.json({ ok: true });
+});
+
+// Users
+app.get("/users", (req, res) => {
+  return res.json({ ok: true });
+});
 
 export default app;
