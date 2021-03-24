@@ -1,18 +1,15 @@
 import { IRepository } from "../repositories/interfaces";
-import { UserEntity } from "../entities";
+import { ListEntity } from "../entities";
 
 export default class ListService {
-  constructor(private repository: IRepository<UserEntity>) {
-    console.log("List Service instanciado");
-  }
+  constructor(private repository: IRepository<ListEntity>) {}
 
-  public async createList(): Promise<UserEntity> {
-    const user = await this.repository.create({
-      name: "Leandro Vieira",
-      email: "leandrofernandesvieira@gmail.com",
-      password: "12345",
+  public async createList(): Promise<ListEntity> {
+    const list = await this.repository.create({
+      month: 3,
+      day: 24,
     });
 
-    return user;
+    return list;
   }
 }

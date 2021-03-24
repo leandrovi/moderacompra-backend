@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 
 import ListService from "../services/ListService";
-import UserRepository from "../repositories/implementations/UserRepository";
+import ListRepository from "../repositories/implementations/ListRepository";
 
-const repository = new UserRepository();
+const repository = new ListRepository();
 const service = new ListService(repository);
 
 export default class ListController {
