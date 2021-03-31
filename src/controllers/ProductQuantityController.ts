@@ -16,8 +16,21 @@ export default class ProductQuantityController {
     public async create(request: Request, response: Response): Promise<Response> {
         try {
 
-            let productQtt = request;
-            const result = await service.create(productQtt.body);
+            const {
+                list_id,
+                product_id,
+                initial_quantity,
+                final_quantity,
+                suggestion_quantity
+            }: ProductQuantityEntity = request.body;
+            
+            const result = await service.create({
+                list_id,
+                product_id,
+                initial_quantity,
+                final_quantity,
+                suggestion_quantity
+            });
 
             return response.json({ ok: result });
         } catch (err) {
@@ -28,7 +41,7 @@ export default class ProductQuantityController {
     public async update(arg0: string, update: any) {
         throw new Error('Method not implemented.');
     }
-    
+
     public async delete(arg0: string) {
         throw new Error('Method not implemented.');
     }

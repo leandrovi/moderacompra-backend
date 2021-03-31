@@ -1,16 +1,11 @@
 import express from "express";
 import moderaRoutes from './routes/routes'
-import bodyParser from 'body-parser';
 
 const app = express();
 
 app.use(express.json());
 
 const router = express();
-
-/** Parse the body of the request */
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
 
 /** Regras da API */
 app.use((req, res, next) => {

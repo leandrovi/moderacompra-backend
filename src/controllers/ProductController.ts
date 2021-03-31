@@ -17,10 +17,10 @@ export default class ProductController {
     public async create(request: Request, response: Response): Promise<Response> {
         try {
 
-            let product = request.body;
-            const result = await service.create(product);
+            const { name }: ProductEntity = request.body;
+            const product = await service.create({name});
 
-            return response.json({ ok: result });
+            return response.json(product);
         } catch (err) {
             return response.status(500);
         }

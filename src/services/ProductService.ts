@@ -4,7 +4,7 @@ import { ProductEntity } from "../entities";
 export default class ProductService {
   constructor(private repository: IRepository<ProductEntity>) {}
 
-  public async create(product: ProductEntity): Promise<ProductEntity> {
+  public async create(product: {name}): Promise<ProductEntity> {
     const list = await this.repository.create(product);
 
     return list;
