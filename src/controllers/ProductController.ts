@@ -8,9 +8,7 @@ const repository = new ProductRepository();
 const service = new ProductService(repository);
 
 export default class ProductController {
-    
-
-    public async getAll(arg0: string, getAll: any) {
+    public async getAll(request: Request, response: Response) {
         throw new Error('Method not implemented.');
     }
 
@@ -26,11 +24,11 @@ export default class ProductController {
         }
     }
 
-    public async update(arg0: string, update: any) {
+    public async update(request: Request, response: Response) {
         throw new Error('Method not implemented.');
     }
     
-    public async delete(arg0: string) {
+    public async delete(request: Request, response: Response) {
         throw new Error('Method not implemented.');
     }
 }
