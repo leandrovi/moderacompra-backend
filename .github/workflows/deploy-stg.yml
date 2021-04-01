@@ -1,0 +1,36 @@
+name: Deploy Staging
+
+on:
+  push:
+    branches:
+      - staging
+
+jobs:
+  deploy:
+    name: Deploy Staging
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Create .env file
+        run: |
+          touch .env
+          echo DB_HOST=${{ secrets.DB_HOST_STG }} >> .env
+          echo DB_USER=${{ secrets.DB_USER_STG }} >> .env
+          echo DB_PASS=${{ secrets.DB_PASS_STG }} >> .env
+          echo DB_NAME=${{ secrets.DB_NAME_STG }} >> .env
+          cat .env
+
+      - name: Deploy backend to heroku (stg)
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: ${{ secrets.HEROKU_APP_NAME_STG }}
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
+          env_file: ".env"
+        env: staging
+
+      - name: Run database migrations (stg)
+        run: npm run migration:run
