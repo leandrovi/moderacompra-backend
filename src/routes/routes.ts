@@ -1,12 +1,14 @@
 import express from "express";
-import ProductQuantityController from "../controllers/ProductQuantityController";
-import ProductController from "../controllers/ProductController";
+
 import ListController from "../controllers/ListController";
+import ProductController from "../controllers/ProductController";
+import ProductQuantityController from "../controllers/ProductQuantityController";
 
 const router = express.Router();
-const ListMethods = new ListController();
-const QttyMethods = new ProductQuantityController();
-const ProductMethods = new ProductController();
+
+const listController = new ListController();
+const productController = new ProductController();
+const productQuantityController = new ProductQuantityController();
 
 // Health Check
 router.get("/health", (req, res) => {
@@ -17,22 +19,30 @@ router.get("/health", (req, res) => {
   return res.status(200).json({ timeCheck: timeStamp });
 });
 
-//Rotas para gerenciar listas
-router.get("/list", ListMethods.getAll);
-router.post("/list", ListMethods.create);
-router.get("/newList", ListMethods.getNewList);
-router.put("/list", ListMethods.update);
+/**
+ * Lists routes
+ */
+router.get("/lists", listController.list);
+router.get("/lists/:id", listController.show);
+router.put("/lists/:id", listController.update);
+router.post("/lists", listController.create);
 
-//Rotas para Gerenciar Produtos
-router.get("/product", ProductMethods.getAll);
-router.post("/product", ProductMethods.create);
-router.put("/product", ProductMethods.update);
-router.delete("/product", ProductMethods.delete);
+/**
+ * Products routes
+ */
+router.get("/product", productController.list);
+router.get("/product/:id", productController.show);
+router.put("/product/:id", productController.update);
+router.post("/product", productController.create);
+router.delete("/product/:id", productController.delete);
 
-//Rotas para Gerenciar Quantidade de Produtos
-router.get("/quantity", QttyMethods.getAll);
-router.post("/quantity", QttyMethods.create);
-router.put("/quantity", QttyMethods.update);
-router.post("/quantity", QttyMethods.delete);
+/**
+ * Quantities routes
+ */
+router.get("/produc-quantity/list", productQuantityController.list);
+router.get("/product-quantity/:id", productQuantityController.show);
+router.put("/product-quantity/:id", productQuantityController.update);
+router.post("/product-quantity", productQuantityController.create);
+router.delete("/product-quantity/:id", productQuantityController.delete);
 
 export = router;
