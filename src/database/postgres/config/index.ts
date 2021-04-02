@@ -8,20 +8,27 @@ const databaseCredentials = {
     username: process.env.DB_USER,
     password: process.env.DB_PASS,
     database: process.env.DB_NAME,
+    dialectOptions: {
+      ssl: false
+    }
   },
   test: {
     host: process.env.DB_HOST,
     username: process.env.DB_USER,
     password: process.env.DB_PASS,
     database: process.env.DB_NAME,
-    ssl: true,
+    dialectOptions: {
+      ssl: true
+    }
   },
   production: {
     host: process.env.DB_HOST,
     username: process.env.DB_USER,
     password: process.env.DB_PASS,
     database: process.env.DB_NAME,
-    ssl: true,
+    dialectOptions: {
+      ssl: true
+    }
   },
 };
 
