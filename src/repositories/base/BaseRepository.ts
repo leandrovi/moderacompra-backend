@@ -29,7 +29,7 @@ export abstract class BaseRepository<T> implements IRepository<T> {
     return await this.BaseModel.findAll();
   }
 
-  async findOne(id: string): Promise<T> {
+  async findById(id: string): Promise<T> {
     return await this.BaseModel.findByPk(id);
   }
 }

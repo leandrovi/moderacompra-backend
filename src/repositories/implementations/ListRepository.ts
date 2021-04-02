@@ -25,7 +25,7 @@ export default class ListRepository implements IRepository<ListEntity> {
     return await List.findAll();
   }
 
-  async findOne(id: string): Promise<ListEntity> {
+  async findById(id: string): Promise<ListEntity> {
     return await List.findByPk(id);
   }
 }

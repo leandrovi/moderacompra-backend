@@ -2,12 +2,16 @@ import { ProductQuantityEntity } from "../../entities";
 import { IRepository } from "../interfaces";
 import ProductQuantity from "../../database/postgres/models/ProductQuantity";
 
-export default class ProductQuantityRepository implements IRepository<ProductQuantityEntity> {
+export default class ProductQuantityRepository
+  implements IRepository<ProductQuantityEntity> {
   async create(item: ProductQuantityEntity): Promise<ProductQuantityEntity> {
     return await ProductQuantity.create(item);
   }
 
-  async update(id: string, item: ProductQuantityEntity): Promise<ProductQuantityEntity> {
+  async update(
+    id: string,
+    item: ProductQuantityEntity
+  ): Promise<ProductQuantityEntity> {
     const [, list] = await ProductQuantity.update(item, {
       where: { id },
     });
@@ -25,7 +29,7 @@ export default class ProductQuantityRepository implements IRepository<ProductQua
     return await ProductQuantity.findAll();
   }
 
-  async findOne(id: string): Promise<ProductQuantityEntity> {
+  async findById(id: string): Promise<ProductQuantityEntity> {
     return await ProductQuantity.findByPk(id);
   }
 }

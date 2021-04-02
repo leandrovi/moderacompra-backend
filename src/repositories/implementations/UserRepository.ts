@@ -25,7 +25,7 @@ export default class UserRepository implements IRepository<UserEntity> {
     return await User.findAll();
   }
 
-  async findOne(id: string): Promise<UserEntity> {
+  async findById(id: string): Promise<UserEntity> {
     return await User.findByPk(id);
   }
 }
