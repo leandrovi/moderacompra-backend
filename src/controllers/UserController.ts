@@ -1,18 +1,18 @@
 import { Request, Response } from "express";
 
-import ListService from "../services/ListService";
-import ListRepository from "../repositories/implementations/ListRepository";
-import { ListEntity } from "../entities";
+import UserService from "../services/UserService";
+import UserRepository from "../repositories/implementations/UserRepository";
+import { UserEntity } from "../entities";
 
-const repository = new ListRepository();
-const service = new ListService(repository);
+const repository = new UserRepository();
+const service = new UserService(repository);
 
-export default class ListController {
+export default class UserController {
   public async list(request: Request, response: Response) {
     try {
-      const lists = await service.getAll();
+      const users = await service.listAll();
 
-      return response.status(200).json(lists);
+      return response.status(200).json(users);
     } catch (err) {
       console.error(err);
       return response.status(500).json({ error: "Internal server error" });
@@ -23,9 +23,9 @@ export default class ListController {
     try {
       const { id } = request.params;
 
-      const list = await service.getById(id);
+      const user = await service.getById(id);
 
-      return response.status(200).json(list);
+      return response.status(200).json(user);
     } catch (err) {
       console.error(err);
       return response.status(500).json({ error: "Internal server error" });
@@ -34,9 +34,9 @@ export default class ListController {
 
   public async create(request: Request, response: Response): Promise<Response> {
     try {
-      const { user_id, month, day }: ListEntity = request.body;
+      const { name, email, password }: UserEntity = request.body;
 
-      const list = await service.createList({ user_id, month, day });
+      const list = await service.createUser({ name, email, password });
 
       return response.json(list);
     } catch (err) {
@@ -48,9 +48,9 @@ export default class ListController {
   public async update(request: Request, response: Response) {
     try {
       const { id } = request.params;
-      const fields: Partial<ListEntity> = request.body;
+      const fields: Partial<UserEntity> = request.body;
 
-      const list = await service.updateList(id, fields);
+      const list = await service.updateUser(id, fields);
 
       return response.json(list);
     } catch (err) {

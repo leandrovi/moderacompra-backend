@@ -8,27 +8,30 @@ const repository = new ProductRepository();
 const service = new ProductService(repository);
 
 export default class ProductController {
-    public async getAll(request: Request, response: Response) {
-        throw new Error('Method not implemented.');
-    }
+  public async list(request: Request, response: Response) {
+    throw new Error("Method not implemented.");
+  }
 
-    public async create(request: Request, response: Response): Promise<Response> {
-        try {
+  public async show(request: Request, response: Response) {
+    throw new Error("Method not implemented.");
+  }
 
-            const { name }: ProductEntity = request.body;
-            const product = await service.create({name});
+  public async create(request: Request, response: Response): Promise<Response> {
+    try {
+      const { name }: ProductEntity = request.body;
+      const product = await service.create({ name });
 
-            return response.json(product);
-        } catch (err) {
-            return response.status(500);
-        }
+      return response.json(product);
+    } catch (err) {
+      return response.status(500);
     }
+  }
 
-    public async update(request: Request, response: Response) {
-        throw new Error('Method not implemented.');
-    }
-    
-    public async delete(request: Request, response: Response) {
-        throw new Error('Method not implemented.');
-    }
+  public async update(request: Request, response: Response) {
+    throw new Error("Method not implemented.");
+  }
+
+  public async delete(request: Request, response: Response) {
+    throw new Error("Method not implemented.");
+  }
 }

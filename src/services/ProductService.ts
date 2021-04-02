@@ -4,37 +4,34 @@ import { ProductEntity } from "../entities";
 export default class ProductService {
   constructor(private repository: IRepository<ProductEntity>) {}
 
-  public async create(product: {name}): Promise<ProductEntity> {
+  public async create(product: { name }): Promise<ProductEntity> {
     const list = await this.repository.create(product);
 
     return list;
   }
 
   public async getAll(): Promise<null> {
-   
     const data = await this.repository.find();
-    return null
+    return null;
   }
 
   public async findById(id: string): Promise<ProductEntity> {
-    const data = await this.repository.findOne(id);
-    
+    const data = await this.repository.findById(id);
+
     return null;
   }
 
   public async update(id: string): Promise<ProductEntity> {
-    const exist = await this.repository.findOne(id);
+    const exist = await this.repository.findById(id);
     if (!exist) {
       return null;
     }
-
   }
 
   public async delete(id: string): Promise<boolean> {
-    const exist = await this.repository.findOne(id);
+    const exist = await this.repository.findById(id);
     if (!exist) {
       return null;
     }
-
   }
 }
