@@ -35,11 +35,7 @@ export default class ListController {
     try {
       const { user_id, month, day } = request.body;
 
-      const list = await service.createList({
-        user_id,
-        month,
-        day,
-      });
+      const list = await service.createList({ user_id, month, day });
 
       return response.json(list);
     } catch (err) {

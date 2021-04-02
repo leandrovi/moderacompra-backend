@@ -5,11 +5,12 @@ export default class UserService {
   constructor(private repository: IRepository<UserEntity>) {}
 
   public async createUser(fields: Partial<UserEntity>): Promise<UserEntity> {
+    const { name, email, password } = fields;
+
     const user = await this.repository.create({
-      name: fields.name,
-      email: fields.email,
-      password: fields.password,
-      password_hash: fields.password_hash,
+      name,
+      email,
+      password,
     });
 
     return user;
@@ -29,7 +30,10 @@ export default class UserService {
     return user;
   }
 
-  public async update(id: string): Promise<UserEntity> {
-    throw new Error("Method not implemented, oh no!!");
+  public async updateUser(
+    id: string,
+    fields: Partial<UserEntity>
+  ): Promise<UserEntity> {
+    return await this.repository.update(id, fields);
   }
 }

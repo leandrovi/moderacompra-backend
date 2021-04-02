@@ -34,8 +34,6 @@ export default class ListService {
     id: string,
     fields: Partial<ListEntity>
   ): Promise<ListEntity> {
-    const list = await this.repository.update(id, fields);
-
-    return list;
+    return await this.repository.update(id, fields);
   }
 }

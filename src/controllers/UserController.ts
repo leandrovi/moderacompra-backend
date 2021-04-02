@@ -8,27 +8,53 @@ const service = new UserService(repository);
 
 export default class UserController {
   public async list(request: Request, response: Response) {
-    const users = await service.listAll();
+    try {
+      const users = await service.listAll();
 
-    return response.status(200).json(users);
+      return response.status(200).json(users);
+    } catch (err) {
+      console.error(err);
+      return response.status(500).json({ error: "Internal server error" });
+    }
   }
 
   public async show(request: Request, response: Response) {
-    throw new Error("Method not implemented.");
+    try {
+      const { id } = request.params;
+
+      const user = await service.getById(id);
+
+      return response.status(200).json(user);
+    } catch (err) {
+      console.error(err);
+      return response.status(500).json({ error: "Internal server error" });
+    }
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
-    // try {
-    //   const {  } = request.body;
-    //   const user = await service.createUser();
-    //   return response.json({ ok: result });
-    // } catch (err) {
-    //   return response.status(500);
-    // }
-    return null;
+    try {
+      const { name, email, password } = request.body;
+
+      const list = await service.createUser({ name, email, password });
+
+      return response.json(list);
+    } catch (err) {
+      console.error(err);
+      return response.status(500).json({ error: "Internal server error" });
+    }
   }
 
   public async update(request: Request, response: Response) {
-    throw new Error("Method not implemented.");
+    try {
+      const { id } = request.params;
+      const fields = request.body;
+
+      const list = await service.updateUser(id, fields);
+
+      return response.json(list);
+    } catch (err) {
+      console.error(err);
+      return response.status(500).json({ error: "Internal server error" });
+    }
   }
 }
