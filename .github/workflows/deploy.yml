@@ -30,7 +30,6 @@ jobs:
           heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
           env_file: ".env"
-        env: production
 
       - name: Run database migrations
         run: npm run migration:run
