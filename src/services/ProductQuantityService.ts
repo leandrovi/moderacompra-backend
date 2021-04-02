@@ -5,35 +5,39 @@ export default class ProductService {
   constructor(private repository: IRepository<ProductQuantityEntity>) {}
 
   public async create(
-    product: ProductQuantityEntity
+    productQtt: ProductQuantityEntity
   ): Promise<ProductQuantityEntity> {
-    const list = await this.repository.create(product);
-
-    return list;
+    return await this.repository.create(productQtt);
   }
 
-  public async getAll(): Promise<null> {
-    const data = await this.repository.find();
-    return null;
+  public async getAll(): Promise<ProductQuantityEntity[]> {
+    return await this.repository.find();
   }
 
   public async findById(id: string): Promise<ProductQuantityEntity> {
     const data = await this.repository.findById(id);
-
-    return null;
+    if (!data) {
+      throw new Error("Product not found");
+    }
+    return data;
   }
 
-  public async update(id: string): Promise<ProductQuantityEntity> {
+  public async update(
+    id: string,
+    fields: Partial<ProductQuantityEntity>
+  ): Promise<ProductQuantityEntity> {
     const exist = await this.repository.findById(id);
     if (!exist) {
-      return null;
+      throw new Error("Product quantity not found");
     }
+    return await this.repository.update(id, fields);
   }
 
   public async delete(id: string): Promise<boolean> {
     const exist = await this.repository.findById(id);
     if (!exist) {
-      return null;
+      throw new Error("Product quantity not found");
     }
+    return await this.repository.delete(id);
   }
 }

@@ -1,5 +1,5 @@
 export class ProductEntity {
-    public id?: string;
-    public name: string;
-  }
-  
+  public id?: string;
+  public name: string;
+  public price: number;
+}
