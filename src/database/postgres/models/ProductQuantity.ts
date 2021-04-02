@@ -13,12 +13,12 @@ interface ProductQuantityCreationAttributes extends Optional<ProductQuantityEnti
 class ProductQuantity
   extends Model<ProductQuantityEntity, ProductQuantityCreationAttributes>
   implements ProductQuantityEntity {
-  public list_id?: string;
-  public product_id?: string;
-  public initial_quantity?: number;
-  public final_quantity: number;
-  public suggestion_quantity: number;
-  public id: string;
+  public id?: string;
+  public list_id: string;
+  public product_id: string;
+  public initial_quantity: number;
+  public final_quantity?: number;
+  public suggestion_quantity?: number;
 }
 
 // Initialize the model for sequelize
