@@ -30,4 +30,6 @@ jobs:
           heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
           env_file: ".env"
-          procfile: "npm run migration:run"
+
+      - name: Run database migrations
+        run: heroku run sequelize db:migrate --env production -m --app ${{ secrets.HEROKU_APP_NAME }}
