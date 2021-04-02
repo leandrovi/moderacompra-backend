@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 
 import UserService from "../services/UserService";
 import UserRepository from "../repositories/implementations/UserRepository";
+import { UserEntity } from "../entities";
 
 const repository = new UserRepository();
 const service = new UserService(repository);
@@ -33,7 +34,7 @@ export default class UserController {
 
   public async create(request: Request, response: Response): Promise<Response> {
     try {
-      const { name, email, password } = request.body;
+      const { name, email, password }: UserEntity = request.body;
 
       const list = await service.createUser({ name, email, password });
 
@@ -47,7 +48,7 @@ export default class UserController {
   public async update(request: Request, response: Response) {
     try {
       const { id } = request.params;
-      const fields = request.body;
+      const fields: Partial<UserEntity> = request.body;
 
       const list = await service.updateUser(id, fields);
 

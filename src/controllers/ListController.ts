@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 
 import ListService from "../services/ListService";
 import ListRepository from "../repositories/implementations/ListRepository";
+import { ListEntity } from "../entities";
 
 const repository = new ListRepository();
 const service = new ListService(repository);
@@ -33,7 +34,7 @@ export default class ListController {
 
   public async create(request: Request, response: Response): Promise<Response> {
     try {
-      const { user_id, month, day } = request.body;
+      const { user_id, month, day }: ListEntity = request.body;
 
       const list = await service.createList({ user_id, month, day });
 
@@ -47,7 +48,7 @@ export default class ListController {
   public async update(request: Request, response: Response) {
     try {
       const { id } = request.params;
-      const fields = request.body;
+      const fields: Partial<ListEntity> = request.body;
 
       const list = await service.updateList(id, fields);
 
