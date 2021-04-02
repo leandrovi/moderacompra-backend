@@ -8,27 +8,57 @@ const service = new ListService(repository);
 
 export default class ListController {
   public async list(request: Request, response: Response) {
-    throw new Error("Method not implemented.");
+    try {
+      const lists = await service.getAll();
+
+      return response.status(200).json(lists);
+    } catch (err) {
+      console.error(err);
+      return response.status(500).json({ error: "Internal server error" });
+    }
   }
 
   public async show(request: Request, response: Response) {
-    throw new Error("Method not implemented.");
+    try {
+      const { id } = request.params;
+
+      const list = await service.getById(id);
+
+      return response.status(200).json(list);
+    } catch (err) {
+      console.error(err);
+      return response.status(500).json({ error: "Internal server error" });
+    }
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
-    // try {
-    //   const {} = request.body;
-    //   const list = await service.createList();
+    try {
+      const { user_id, month, day } = request.body;
 
-    //   return response.json({ ok: result });
-    // } catch (err) {
-    //   return response.status(500);
-    // }
+      const list = await service.createList({
+        user_id,
+        month,
+        day,
+      });
 
-    return null;
+      return response.json(list);
+    } catch (err) {
+      console.error(err);
+      return response.status(500).json({ error: "Internal server error" });
+    }
   }
 
   public async update(request: Request, response: Response) {
-    throw new Error("Method not implemented.");
+    try {
+      const { id } = request.params;
+      const fields = request.body;
+
+      const list = await service.updateList(id, fields);
+
+      return response.json(list);
+    } catch (err) {
+      console.error(err);
+      return response.status(500).json({ error: "Internal server error" });
+    }
   }
 }

@@ -11,9 +11,10 @@ export abstract class BaseRepository<T> implements IRepository<T> {
     return await this.BaseModel.create(item);
   }
 
-  async update(id: string, item: T): Promise<T> {
-    const [, list] = await this.BaseModel.update(item, {
+  async update(id: string, fields: Partial<T>): Promise<T> {
+    const [, list] = await this.BaseModel.update(fields, {
       where: { id },
+      returning: true,
     });
 
     return list[0];
