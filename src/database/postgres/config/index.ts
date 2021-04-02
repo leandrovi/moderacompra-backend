@@ -18,7 +18,10 @@ const databaseCredentials = {
     password: process.env.DB_PASS,
     database: process.env.DB_NAME,
     dialectOptions: {
-      ssl: true
+      ssl: {
+        require: true,
+        rejectUnauthorized: false
+      }
     }
   },
   production: {
@@ -27,17 +30,21 @@ const databaseCredentials = {
     password: process.env.DB_PASS,
     database: process.env.DB_NAME,
     dialectOptions: {
-      ssl: true
+      ssl: {
+        require: true,
+        rejectUnauthorized: false
+      }
     }
   },
 };
 
-const { host, username, password, database } = databaseCredentials[
+const { host, username, password, database, dialectOptions } = databaseCredentials[
   process.env.NODE_ENV
 ];
 
 module.exports = {
   dialect,
+  dialectOptions,
   host,
   username,
   password,
