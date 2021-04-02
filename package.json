@@ -6,9 +6,9 @@
   "type": "commonjs",
   "scripts": {
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts",
-    "migration:create": "sequelize-cli migration:generate",
-    "migration:run": "sequelize-cli db:migrate",
-    "migration:undo": "sequelize-cli db:migrate:undo",
+    "migration:create": "npx sequelize-cli migration:generate",
+    "migration:run": "npx sequelize-cli db:migrate",
+    "migration:undo": "npx sequelize-cli db:migrate:undo",
     "postinstall": "tsc",
     "watch-node": "nodemon dist/index.js",
     "watch-ts": "tsc -w",
