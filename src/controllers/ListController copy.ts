@@ -17,7 +17,7 @@ export default class ListController {
 
   public async create(request: Request, response: Response): Promise<Response> {
     // try {
-    //   const {} = request.body;
+    //   const {  } = request.body;
     //   const list = await service.createList();
 
     //   return response.json({ ok: result });

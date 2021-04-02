@@ -1,11 +1,13 @@
 import express from "express";
 
+import UserController from "../controllers/UserController";
 import ListController from "../controllers/ListController";
 import ProductController from "../controllers/ProductController";
 import ProductQuantityController from "../controllers/ProductQuantityController";
 
 const router = express.Router();
 
+const userController = new UserController();
 const listController = new ListController();
 const productController = new ProductController();
 const productQuantityController = new ProductQuantityController();
@@ -18,6 +20,14 @@ router.get("/health", (req, res) => {
 
   return res.status(200).json({ timeCheck: timeStamp });
 });
+
+/**
+ * Users routes
+ */
+router.get("/users", userController.list);
+router.get("/users/:id", userController.show);
+router.put("/users/:id", userController.update);
+router.post("/users", userController.create);
 
 /**
  * Lists routes
