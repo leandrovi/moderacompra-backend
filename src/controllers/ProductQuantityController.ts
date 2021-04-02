@@ -8,14 +8,12 @@ const repository = new ProductQuantityRepository();
 const service = new ProductQuantityService(repository);
 
 export default class ProductQuantityController {
-
-    public async getAll(arg0: string, getAll: any) {
+    public async getAll(request: Request, response: Response) {
         throw new Error('Method not implemented.');
     }
 
     public async create(request: Request, response: Response): Promise<Response> {
         try {
-
             const {
                 list_id,
                 product_id,
@@ -38,11 +36,11 @@ export default class ProductQuantityController {
         }
     }
 
-    public async update(arg0: string, update: any) {
+    public async update(request: Request, response: Response) {
         throw new Error('Method not implemented.');
     }
 
-    public async delete(arg0: string) {
+    public async delete(request: Request, response: Response) {
         throw new Error('Method not implemented.');
     }
 }

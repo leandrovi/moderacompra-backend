@@ -12,4 +12,16 @@ export default class ListService {
 
     return list;
   }
+
+  public async getAll(): Promise<ListEntity[]> {
+    throw new Error("Method not implemented, oh no!!");
+  }
+
+  public async getById(id: string): Promise<ListEntity> {
+    throw new Error("Method not implemented, oh no!!");
+  }
+
+  public async update(id: string): Promise<ListEntity> {
+    throw new Error("Method not implemented, oh no!!");
+  }
 }
