@@ -1,6 +1,7 @@
 import { Sequelize } from "sequelize";
+import path from 'path';
 
-const config = require("./config/index.ts");
+const config = require(path.resolve(__dirname, 'config', 'index.ts'));
 
 export default class Database {
   private static instance: Database;
