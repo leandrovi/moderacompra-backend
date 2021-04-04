@@ -7,7 +7,8 @@ import List from "./List";
 
 const database = Database.getInstance();
 
-interface ProductQuantityCreationAttributes extends Optional<ProductQuantityEntity, "id"> {}
+interface ProductQuantityCreationAttributes
+  extends Optional<ProductQuantityEntity, "id"> {}
 
 // Define the attributes and methods
 class ProductQuantity
@@ -19,6 +20,7 @@ class ProductQuantity
   public initial_quantity: number;
   public final_quantity?: number;
   public suggestion_quantity?: number;
+  public local_price?: number;
 }
 
 // Initialize the model for sequelize
@@ -38,17 +40,21 @@ ProductQuantity.init(
       allowNull: false,
     },
     initial_quantity: {
-      type: Sequelize.STRING,
+      type: Sequelize.NUMBER,
       allowNull: false,
     },
     final_quantity: {
-      type: Sequelize.STRING,
-      allowNull: false,
+      type: Sequelize.NUMBER,
+      allowNull: true,
     },
     suggestion_quantity: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    }
+      type: Sequelize.NUMBER,
+      allowNull: true,
+    },
+    local_price: {
+      type: Sequelize.NUMBER,
+      allowNull: true,
+    },
   },
   {
     sequelize: database.connection,
@@ -56,9 +62,12 @@ ProductQuantity.init(
 );
 
 // Dealing with custom actions on hooks
-ProductQuantity.addHook("beforeCreate", (ProductQuantity: ProductQuantity): void => {
+ProductQuantity.addHook(
+  "beforeCreate",
+  (ProductQuantity: ProductQuantity): void => {
     ProductQuantity.id = uuidv4();
-});
+  }
+);
 
 // Relationships
 ProductQuantity.belongsTo(List, { foreignKey: "list_id", as: "list" });
