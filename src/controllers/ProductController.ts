@@ -17,6 +17,7 @@ export default class ProductController {
       return response.status(500).json({ error: "Internal server error" });
     }
   }
+
   public async show(request: Request, response: Response) {
     try {
       const { id } = request.params;
@@ -29,6 +30,7 @@ export default class ProductController {
       return response.status(500).json({ error: "Internal server error" });
     }
   }
+
   public async create(request: Request, response: Response): Promise<Response> {
     try {
       const { name, price }: ProductEntity = request.body;
@@ -36,6 +38,7 @@ export default class ProductController {
 
       return response.status(200).json(product);
     } catch (err) {
+      console.log(err);
       return response.status(500).json({ error: "Internal server error" });
     }
   }

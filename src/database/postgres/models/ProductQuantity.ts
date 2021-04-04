@@ -21,6 +21,9 @@ class ProductQuantity
   public final_quantity?: number;
   public suggestion_quantity?: number;
   public local_price?: number;
+
+  public readonly created_at?: Date;
+  public readonly updated_at?: Date;
 }
 
 // Initialize the model for sequelize
@@ -71,5 +74,11 @@ ProductQuantity.addHook(
 
 // Relationships
 ProductQuantity.belongsTo(List, { foreignKey: "list_id", as: "list" });
+
+// Relationships
+ProductQuantity.belongsTo(ProductQuantity, {
+  foreignKey: "product_id",
+  as: "product",
+});
 
 export default ProductQuantity;

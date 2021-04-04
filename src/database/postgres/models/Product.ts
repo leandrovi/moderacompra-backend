@@ -16,6 +16,9 @@ class Product
   public id: string;
   public name: string;
   public price: number;
+
+  public readonly created_at?: Date;
+  public readonly updated_at?: Date;
 }
 
 // Initialize the model for sequelize
@@ -44,8 +47,5 @@ Product.init(
 Product.addHook("beforeCreate", (Product: Product): void => {
   Product.id = uuidv4();
 });
-
-// Relationships
-Product.belongsTo(ProductQuantity, { foreignKey: "product_id", as: "product" });
 
 export default Product;
