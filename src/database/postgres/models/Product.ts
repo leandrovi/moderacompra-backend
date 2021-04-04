@@ -15,6 +15,7 @@ class Product
   implements ProductEntity {
   public id: string;
   public name: string;
+  public price: number;
 }
 
 // Initialize the model for sequelize
@@ -28,7 +29,11 @@ Product.init(
     name: {
       type: Sequelize.STRING,
       allowNull: false,
-    }
+    },
+    price: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
   },
   {
     sequelize: database.connection,
@@ -37,7 +42,7 @@ Product.init(
 
 // Dealing with custom actions on hooks
 Product.addHook("beforeCreate", (Product: Product): void => {
-    Product.id = uuidv4();
+  Product.id = uuidv4();
 });
 
 // Relationships
