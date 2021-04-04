@@ -48,7 +48,4 @@ Product.addHook("beforeCreate", (Product: Product): void => {
   Product.id = uuidv4();
 });
 
-// Relationships
-Product.belongsTo(ProductQuantity, { foreignKey: "product_id", as: "product" });
-
 export default Product;
