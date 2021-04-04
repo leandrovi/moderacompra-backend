@@ -16,6 +16,9 @@ class Product
   public id: string;
   public name: string;
   public price: number;
+
+  public readonly created_at?: Date;
+  public readonly updated_at?: Date;
 }
 
 // Initialize the model for sequelize

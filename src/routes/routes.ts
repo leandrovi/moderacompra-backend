@@ -40,19 +40,19 @@ router.post("/lists", listController.create);
 /**
  * Products routes
  */
-router.get("/product", productController.list);
-router.get("/product/:id", productController.show);
-router.put("/product/:id", productController.update);
-router.post("/product", productController.create);
-router.delete("/product/:id", productController.delete);
+router.get("/products", productController.list);
+router.get("/products/:id", productController.show);
+router.put("/products/:id", productController.update);
+router.post("/products", productController.create);
+router.delete("/products/:id", productController.delete);
 
 /**
  * Quantities routes
  */
-router.get("/produc-quantity/list", productQuantityController.list);
-router.get("/product-quantity/:id", productQuantityController.show);
-router.put("/product-quantity/:id", productQuantityController.update);
-router.post("/product-quantity", productQuantityController.create);
-router.delete("/product-quantity/:id", productQuantityController.delete);
+router.get("/product-quantities/list", productQuantityController.list);
+router.get("/product-quantities/:id", productQuantityController.show);
+router.put("/product-quantities/:id", productQuantityController.update);
+router.post("/product-quantities", productQuantityController.create);
+router.delete("/product-quantities/:id", productQuantityController.delete);
 
 export = router;
