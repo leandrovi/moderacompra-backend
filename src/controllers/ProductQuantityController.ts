@@ -53,6 +53,7 @@ export default class ProductQuantityController {
 
       return response.json(productQtt);
     } catch (err) {
+      console.log(err);
       return response.status(500).json({ error: "Internal server error" });
     }
   }
