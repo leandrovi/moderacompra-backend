@@ -29,6 +29,7 @@
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.5.1",
     "pg-hstore": "^2.3.3",
+    "promisify": "^0.0.3",
     "sequelize": "^6.6.1",
     "sequelize-cli": "^6.2.0",
     "uuid": "^8.3.2"

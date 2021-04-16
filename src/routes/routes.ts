@@ -14,6 +14,8 @@ const listController = new ListController();
 const productController = new ProductController();
 const productQuantityController = new ProductQuantityController();
 
+import authMiddleware from "../middlewares/auth";
+
 /**
  * Open Routes without authentication
  */
@@ -28,6 +30,8 @@ router.get("/health", (req, res) => {
 });
 
 router.post("/sessions", sessionController.authenticate);
+
+router.use(authMiddleware);
 
 /**
  * Routes that need authentication
