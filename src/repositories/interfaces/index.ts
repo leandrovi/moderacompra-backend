@@ -4,4 +4,5 @@ export interface IRepository<T> {
   delete(id: string): Promise<boolean>;
   find(): Promise<T[]>;
   findById(id: string): Promise<T>;
+  findByEmail?(email: string): Promise<T>;
 }
