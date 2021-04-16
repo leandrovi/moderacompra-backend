@@ -30,6 +30,12 @@ export default class UserService {
     return user;
   }
 
+  public async getByEmail(email: string): Promise<UserEntity> {
+    const user = await this.repository.findByEmail(email);
+
+    return user;
+  }
+
   public async updateUser(
     id: string,
     fields: Partial<UserEntity>

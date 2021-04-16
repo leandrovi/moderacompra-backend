@@ -1,6 +1,7 @@
 import express from "express";
 
 import UserController from "../controllers/UserController";
+import SessionController from "../controllers/SessionController";
 import ListController from "../controllers/ListController";
 import ProductController from "../controllers/ProductController";
 import ProductQuantityController from "../controllers/ProductQuantityController";
@@ -8,9 +9,14 @@ import ProductQuantityController from "../controllers/ProductQuantityController"
 const router = express.Router();
 
 const userController = new UserController();
+const sessionController = new SessionController();
 const listController = new ListController();
 const productController = new ProductController();
 const productQuantityController = new ProductQuantityController();
+
+/**
+ * Open Routes without authentication
+ */
 
 // Health Check
 router.get("/health", (req, res) => {
@@ -20,6 +26,12 @@ router.get("/health", (req, res) => {
 
   return res.status(200).json({ timeCheck: timeStamp });
 });
+
+router.post("/sessions", sessionController.authenticate);
+
+/**
+ * Routes that need authentication
+ */
 
 /**
  * Users routes
