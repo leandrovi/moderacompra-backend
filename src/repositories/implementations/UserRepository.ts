@@ -7,4 +7,10 @@ export default class UserRepository extends BaseRepository<UserEntity> {
   constructor() {
     super(User);
   }
+
+  async findByEmail(email: string): Promise<UserEntity> {
+    return await User.findOne({
+      where: { email: email },
+    });
+  }
 }
