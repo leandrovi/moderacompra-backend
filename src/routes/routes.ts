@@ -5,6 +5,8 @@ import SessionController from "../controllers/SessionController";
 import ListController from "../controllers/ListController";
 import ProductController from "../controllers/ProductController";
 import ProductQuantityController from "../controllers/ProductQuantityController";
+import authMiddleware from "../middlewares/auth";
+import ScrapController from "../controllers/ScrapController";
 
 const router = express.Router();
 
@@ -13,8 +15,7 @@ const sessionController = new SessionController();
 const listController = new ListController();
 const productController = new ProductController();
 const productQuantityController = new ProductQuantityController();
-
-import authMiddleware from "../middlewares/auth";
+const scrapController = new ScrapController();
 
 /**
  * Open Routes without authentication
@@ -31,7 +32,7 @@ router.get("/health", (req, res) => {
 
 router.post("/sessions", sessionController.authenticate);
 
-router.use(authMiddleware);
+//router.use(authMiddleware);
 
 /**
  * Routes that need authentication
@@ -70,5 +71,10 @@ router.get("/product-quantities/:id", productQuantityController.show);
 router.put("/product-quantities/:id", productQuantityController.update);
 router.post("/product-quantities", productQuantityController.create);
 router.delete("/product-quantities/:id", productQuantityController.delete);
+
+/*
+ * Scrap routes
+ */
+router.post("/scrap", scrapController.parseNote);
 
 export = router;
