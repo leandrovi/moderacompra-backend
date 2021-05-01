@@ -15,7 +15,7 @@ class List
   implements ListEntity {
   public id: string;
   public user_id: string;
-  public id_status: string;
+  public id_status: number;
 
   public readonly created_at?: Date;
   public readonly updated_at?: Date;
@@ -34,7 +34,7 @@ List.init(
       allowNull: true,
     },
     id_status: {
-      type: Sequelize.STRING,
+      type: Sequelize.NUMBER,
       allowNull: true,
     },
   },

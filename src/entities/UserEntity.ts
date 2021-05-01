@@ -4,5 +4,5 @@ export class UserEntity {
   public email: string;
   public password: string;
   public password_hash?: string;
-  public id_behavior: string;
+  public id_behaviour: string;
 }
