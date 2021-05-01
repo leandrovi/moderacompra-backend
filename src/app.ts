@@ -8,6 +8,8 @@ app.use(express.json());
 /** Regras da API */
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
+  //bruno adicionou 29/02
+  res.header("Access-Control-Allow-Headers", "Content-Type, X-Custom-Header");
   // res.header("Content-Type, Accept");
 
   if (req.method == "OPTIONS") {
