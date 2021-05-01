@@ -3,9 +3,9 @@ import ScrapService from "../services/ScrapService";
 
 const service = new ScrapService();
 
-type URL = {
+interface CreateScrapBody {
   url_nfce: string;
-};
+}
 
 export default class ScrapController {
   public async parseNote(
@@ -13,7 +13,7 @@ export default class ScrapController {
     response: Response
   ): Promise<Response> {
     try {
-      const { url_nfce }: URL = request.body;
+      const { url_nfce }: CreateScrapBody = request.body;
 
       const list = await service.parse(url_nfce);
 

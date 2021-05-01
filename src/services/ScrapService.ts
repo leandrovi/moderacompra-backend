@@ -1,22 +1,6 @@
 ﻿import axios from "axios";
 import cheerio from "cheerio";
-import { send } from "node:process";
-
-//exemplo de nota com 75 itens
-//let url = 'https://www.nfce.fazenda.sp.gov.br/NFCeConsultaPublica/Paginas/ConsultaQRCode.aspx?p=35210445543915032890650110000753901868429817%7C2%7C1%7C4%7CDAC7F7B50EF4A90D1009ACFA36E9085815B7EFE8';
-
-type ProductScrap = {
-  description: string;
-  code: string;
-  quantity: number;
-  unity_measure: string;
-  unitary_value: number;
-};
-
-type ListScrap = {
-  products: ProductScrap[];
-  totalCount: number;
-};
+import { ListScrap, ProductScrap } from "../entities/ScrapEntity";
 
 export default class ScrapService {
   public async parse(url: string): Promise<ListScrap> {
