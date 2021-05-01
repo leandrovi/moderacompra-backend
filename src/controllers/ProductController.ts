@@ -33,8 +33,8 @@ export default class ProductController {
 
   public async create(request: Request, response: Response): Promise<Response> {
     try {
-      const { name, price }: ProductEntity = request.body;
-      const product = await service.create({ name, price });
+      const { name }: ProductEntity = request.body;
+      const product = await service.create({ name });
 
       return response.status(200).json(product);
     } catch (err) {

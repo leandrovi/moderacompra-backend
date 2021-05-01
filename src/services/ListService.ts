@@ -5,12 +5,11 @@ export default class ListService {
   constructor(private repository: IRepository<ListEntity>) {}
 
   public async createList(fields: Partial<ListEntity>): Promise<ListEntity> {
-    const { user_id, month, day } = fields;
+    const { user_id, id_status } = fields;
 
     const list = await this.repository.create({
       user_id,
-      month,
-      day,
+      id_status,
     });
 
     return list;
