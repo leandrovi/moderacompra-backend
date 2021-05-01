@@ -15,13 +15,12 @@ module.exports = {
         onDelete: 'SET NULL',
         allowNull: true,
       },
-      month: {
-        allowNull: false,
-        type: Sequelize.INTEGER
-      },
-      day: {
-        allowNull: false,
-        type: Sequelize.INTEGER
+      id_status: {
+        type: Sequelize.INTEGER,
+        references: { model: 'status', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
+        allowNull: true
       },
       created_at: {
         allowNull: false,

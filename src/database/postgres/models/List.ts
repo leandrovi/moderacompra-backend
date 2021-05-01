@@ -15,8 +15,7 @@ class List
   implements ListEntity {
   public id: string;
   public user_id: string;
-  public month: number;
-  public day: number;
+  public id_status: number;
 
   public readonly created_at?: Date;
   public readonly updated_at?: Date;
@@ -34,13 +33,9 @@ List.init(
       type: Sequelize.STRING,
       allowNull: true,
     },
-    month: {
-      type: Sequelize.INTEGER,
-      allowNull: false,
-    },
-    day: {
-      type: Sequelize.INTEGER,
-      allowNull: false,
+    id_status: {
+      type: Sequelize.NUMBER,
+      allowNull: true,
     },
   },
   {

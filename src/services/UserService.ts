@@ -5,12 +5,13 @@ export default class UserService {
   constructor(private repository: IRepository<UserEntity>) {}
 
   public async createUser(fields: Partial<UserEntity>): Promise<UserEntity> {
-    const { name, email, password } = fields;
+    const { name, email, password, id_behaviour } = fields;
 
     const user = await this.repository.create({
       name,
       email,
       password,
+      id_behaviour,
     });
 
     return user;

@@ -39,7 +39,7 @@ export default class ProductQuantityController {
         initial_quantity,
         final_quantity,
         suggestion_quantity,
-        local_price,
+        id_unity,
       }: ProductQuantityEntity = request.body;
 
       const productQtt = await service.create({
@@ -48,7 +48,7 @@ export default class ProductQuantityController {
         initial_quantity,
         final_quantity,
         suggestion_quantity,
-        local_price,
+        id_unity,
       });
 
       return response.json(productQtt);

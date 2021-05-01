@@ -2,21 +2,20 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.createTable('products', {
+    return queryInterface.createTable('behaviours', {
       id: {
         type: Sequelize.STRING,
         primaryKey: true,
         unique: true
       },
-      name: {
+      description: {
         type: Sequelize.STRING,
-        primaryKey: true,
-        unique: true
+        allowNull: true
       }
     })
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('products')
+    return queryInterface.dropTable('behaviours')
   }
 };

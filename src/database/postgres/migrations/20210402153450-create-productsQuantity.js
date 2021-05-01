@@ -14,7 +14,7 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
         type: Sequelize.STRING
-        
+
       },
       product_id: {
         allowNull: false,
@@ -26,20 +26,24 @@ module.exports = {
       },
       initial_quantity: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL
       },
       final_quantity: {
-        allowNull: false,
-        type: Sequelize.INTEGER
+        allowNull: true,
+        type: Sequelize.DECIMAL
       },
       suggestion_quantity: {
-        allowNull: false,
-        type: Sequelize.INTEGER
+        allowNull: true,
+        type: Sequelize.DECIMAL
       },
-      local_price: {
+      id_unity: {
         allowNull: false,
-        type: Sequelize.INTEGER
-      }
+        references: { model: 'unities', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
+        unique: true,
+        type: Sequelize.STRING
+      },
     })
   },
 
