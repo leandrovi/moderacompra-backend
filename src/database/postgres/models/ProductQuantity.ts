@@ -18,9 +18,9 @@ class ProductQuantity
   public list_id: string;
   public product_id: string;
   public initial_quantity: number;
-  public final_quantity?: number;
-  public suggestion_quantity?: number;
-  public local_price?: number;
+  public final_quantity: number;
+  public suggestion_quantity: number;
+  public id_unity?: string;
 
   public readonly created_at?: Date;
   public readonly updated_at?: Date;
@@ -54,9 +54,9 @@ ProductQuantity.init(
       type: Sequelize.NUMBER,
       allowNull: true,
     },
-    local_price: {
-      type: Sequelize.NUMBER,
-      allowNull: true,
+    id_unity: {
+      type: Sequelize.STRING,
+      allowNull: false,
     },
   },
   {

@@ -15,7 +15,6 @@ class Product
   implements ProductEntity {
   public id: string;
   public name: string;
-  public price: number;
 
   public readonly created_at?: Date;
   public readonly updated_at?: Date;
@@ -31,11 +30,8 @@ Product.init(
     },
     name: {
       type: Sequelize.STRING,
-      allowNull: false,
-    },
-    price: {
-      type: Sequelize.STRING,
-      allowNull: false,
+      unique: true,
+      primaryKey: true,
     },
   },
   {
