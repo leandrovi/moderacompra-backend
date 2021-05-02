@@ -33,8 +33,5 @@ jobs:
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
           env_file: ".env"
 
-      - name: Undo wrong migrations (stg)
-        run: heroku run sequelize db:migrate:undo:all --to 20210501191300-create-behaviours.js --env production --app ${{ secrets.HEROKU_APP_NAME_STG }}
-
       - name: Run database migrations (stg)
         run: heroku run sequelize db:migrate --env production --app ${{ secrets.HEROKU_APP_NAME_STG }} --debug
