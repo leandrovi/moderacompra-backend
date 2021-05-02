@@ -37,4 +37,4 @@ jobs:
         run: heroku run sequelize db:migrate:undo:all --to 20210501191300-create-behaviours.js --env production --app ${{ secrets.HEROKU_APP_NAME_STG }}
 
       - name: Run database migrations (stg)
-        run: heroku run sequelize db:migrate --env production --app ${{ secrets.HEROKU_APP_NAME_STG }}
+        run: heroku run sequelize db:migrate --env production --app ${{ secrets.HEROKU_APP_NAME_STG }} --debug
