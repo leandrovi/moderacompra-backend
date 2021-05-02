@@ -9,9 +9,12 @@ module.exports = {
         unique: true
       },
       name: {
-        type: Sequelize.STRING,
-        primaryKey: true,
-        unique: true
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      price: {
+        allowNull: false,
+        type: Sequelize.INTEGER
       }
     })
   },
