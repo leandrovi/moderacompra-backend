@@ -21,13 +21,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      id_behaviour: {
-        type: Sequelize.STRING,
-        references: { model: 'behaviours', key: 'id' },
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
-        allowNull: true
-      },
       created_at: {
         allowNull: false,
         type: Sequelize.DATE

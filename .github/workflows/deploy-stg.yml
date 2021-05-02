@@ -34,4 +34,4 @@ jobs:
           env_file: ".env"
 
       - name: Run database migrations (stg)
-        run: heroku run sequelize db:migrate --env production --app ${{ secrets.HEROKU_APP_NAME_STG }}
+        run: heroku run sequelize db:migrate --env production --app ${{ secrets.HEROKU_APP_NAME_STG }} --debug

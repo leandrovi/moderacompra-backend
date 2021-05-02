@@ -20,7 +20,7 @@ app.use((req, res, next) => {
 });
 
 /** Rotas da API */
-app.use("/modera", moderaRoutes);
+app.use(moderaRoutes);
 
 /** Error */
 app.use((req, res, next) => {
