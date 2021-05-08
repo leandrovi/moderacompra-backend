@@ -17,10 +17,9 @@ export default class ListService {
       });
       return list;
     } else {
-      fields.id_status = 2;
       const list = await this.repository.create({
         user_id,
-        id_status,
+        id_status: 2,
       });
       return list;
     }
