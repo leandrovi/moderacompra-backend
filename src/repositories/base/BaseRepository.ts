@@ -31,7 +31,7 @@ export abstract class BaseRepository<T> implements IRepository<T> {
   }
 
   async findAndCountAll(
-    options: object
+    options?: object
   ): Promise<{ count: number; rows: T[] }> {
     return await this.BaseModel.findAndCountAll(options);
   }
