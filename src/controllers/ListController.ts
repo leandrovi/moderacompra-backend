@@ -10,7 +10,17 @@ const service = new ListService(repository);
 export default class ListController {
   public async list(request: Request, response: Response) {
     try {
-      const lists = await service.getAll();
+      const orderby = request.query.order
+        ? [request.query.order.toString().split(",")]
+        : null;
+
+      const options = {
+        limit: request.query.limit || 20,
+        offset: request.query.offset || 0,
+        order: orderby,
+      };
+
+      const lists = await service.getAll(options);
 
       return response.status(200).json(lists);
     } catch (err) {

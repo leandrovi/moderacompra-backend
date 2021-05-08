@@ -15,8 +15,10 @@ export default class ListService {
     return list;
   }
 
-  public async getAll(): Promise<ListEntity[]> {
-    return await this.repository.find();
+  public async getAll(
+    options?: object
+  ): Promise<{ count: number; rows: ListEntity[] }> {
+    return await this.repository.findAndCountAll(options);
   }
 
   public async getById(id: string): Promise<ListEntity> {
