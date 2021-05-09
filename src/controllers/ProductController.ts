@@ -53,6 +53,21 @@ export default class ProductController {
     }
   }
 
+  public async createBach(
+    request: Request,
+    response: Response
+  ): Promise<Response> {
+    try {
+      const [{ name }]: ProductEntity[] = request.body;
+      const product = await service.createBach([{ name }]);
+
+      return response.status(200).json(product);
+    } catch (err) {
+      console.log(err);
+      return response.status(500).json({ error: "Internal server error" });
+    }
+  }
+
   public async update(request: Request, response: Response): Promise<Response> {
     try {
       const { id } = request.params;

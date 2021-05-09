@@ -68,6 +68,40 @@ export default class ProductQuantityController {
     }
   }
 
+  public async createBach(
+    request: Request,
+    response: Response
+  ): Promise<Response> {
+    try {
+      const [
+        {
+          list_id,
+          product_id,
+          initial_quantity,
+          final_quantity,
+          suggestion_quantity,
+          id_unity,
+        },
+      ]: ProductQuantityEntity[] = request.body;
+
+      const productQtt = await service.createBach([
+        {
+          list_id,
+          product_id,
+          initial_quantity,
+          final_quantity,
+          suggestion_quantity,
+          id_unity,
+        },
+      ]);
+
+      return response.json(productQtt);
+    } catch (err) {
+      console.log(err);
+      return response.status(500).json({ error: "Internal server error" });
+    }
+  }
+
   public async update(request: Request, response: Response) {
     try {
       const { id } = request.params;
