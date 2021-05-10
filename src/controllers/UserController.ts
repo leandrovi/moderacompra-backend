@@ -10,7 +10,17 @@ const service = new UserService(repository);
 export default class UserController {
   public async list(request: Request, response: Response) {
     try {
-      const users = await service.listAll();
+      const orderby = request.query.order
+        ? [request.query.order.toString().split(",")]
+        : null;
+
+      const options = {
+        limit: request.query.limit || 20,
+        offset: request.query.offset || 0,
+        order: orderby,
+      };
+
+      const users = await service.getAll(options);
 
       return response.status(200).json(users);
     } catch (err) {

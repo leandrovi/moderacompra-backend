@@ -10,7 +10,17 @@ const service = new ProductService(repository);
 export default class ProductController {
   public async list(request: Request, response: Response): Promise<Response> {
     try {
-      const products = await service.getAll();
+      const orderby = request.query.order
+        ? [request.query.order.toString().split(",")]
+        : null;
+
+      const options = {
+        limit: request.query.limit || 20,
+        offset: request.query.offset || 0,
+        order: orderby,
+      };
+
+      const products = await service.getAll(options);
 
       return response.status(200).json(products);
     } catch (err) {

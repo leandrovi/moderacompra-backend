@@ -9,8 +9,10 @@ export default class ProductService {
     return list;
   }
 
-  public async getAll(): Promise<ProductEntity[]> {
-    return await this.repository.find();
+  public async getAll(
+    options?: object
+  ): Promise<{ count: number; rows: ProductEntity[] }> {
+    return await this.repository.findAndCountAll(options);
   }
 
   public async findById(id: string): Promise<ProductEntity> {

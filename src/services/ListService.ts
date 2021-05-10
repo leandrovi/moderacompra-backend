@@ -4,19 +4,31 @@ import { ListEntity } from "../entities";
 export default class ListService {
   constructor(private repository: IRepository<ListEntity>) {}
 
-  public async createList(fields: Partial<ListEntity>): Promise<ListEntity> {
+  public async createList(
+    fields: Partial<ListEntity>,
+    isFirstList: boolean
+  ): Promise<ListEntity> {
     const { user_id, id_status } = fields;
 
-    const list = await this.repository.create({
-      user_id,
-      id_status,
-    });
-
-    return list;
+    if (!isFirstList) {
+      const list = await this.repository.create({
+        user_id,
+        id_status,
+      });
+      return list;
+    } else {
+      const list = await this.repository.create({
+        user_id,
+        id_status: 2,
+      });
+      return list;
+    }
   }
 
-  public async getAll(): Promise<ListEntity[]> {
-    return await this.repository.find();
+  public async getAll(
+    options?: object
+  ): Promise<{ count: number; rows: ListEntity[] }> {
+    return await this.repository.findAndCountAll(options);
   }
 
   public async getById(id: string): Promise<ListEntity> {

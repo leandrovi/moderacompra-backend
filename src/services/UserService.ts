@@ -17,8 +17,10 @@ export default class UserService {
     return user;
   }
 
-  public async listAll(): Promise<UserEntity[]> {
-    return await this.repository.find();
+  public async getAll(
+    options?: object
+  ): Promise<{ count: number; rows: UserEntity[] }> {
+    return await this.repository.findAndCountAll(options);
   }
 
   public async getById(id: string): Promise<UserEntity> {

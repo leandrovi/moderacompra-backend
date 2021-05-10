@@ -30,6 +30,12 @@ export abstract class BaseRepository<T> implements IRepository<T> {
     return await this.BaseModel.findAll();
   }
 
+  async findAndCountAll(
+    options?: object
+  ): Promise<{ count: number; rows: T[] }> {
+    return await this.BaseModel.findAndCountAll(options);
+  }
+
   async findById(id: string): Promise<T> {
     return await this.BaseModel.findByPk(id);
   }

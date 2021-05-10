@@ -10,8 +10,10 @@ export default class ProductService {
     return await this.repository.create(productQtt);
   }
 
-  public async getAll(): Promise<ProductQuantityEntity[]> {
-    return await this.repository.find();
+  public async getAll(
+    options?: object
+  ): Promise<{ count: number; rows: ProductQuantityEntity[] }> {
+    return await this.repository.findAndCountAll(options);
   }
 
   public async findById(id: string): Promise<ProductQuantityEntity> {
