@@ -68,32 +68,14 @@ export default class ProductQuantityController {
     }
   }
 
-  public async createBach(
+  public async createBatch(
     request: Request,
     response: Response
   ): Promise<Response> {
     try {
-      const [
-        {
-          list_id,
-          product_id,
-          initial_quantity,
-          final_quantity,
-          suggestion_quantity,
-          id_unity,
-        },
-      ]: ProductQuantityEntity[] = request.body;
+      const productQttList: ProductQuantityEntity[] = request.body;
 
-      const productQtt = await service.createBach([
-        {
-          list_id,
-          product_id,
-          initial_quantity,
-          final_quantity,
-          suggestion_quantity,
-          id_unity,
-        },
-      ]);
+      const productQtt = await service.createBatch(productQttList);
 
       return response.json(productQtt);
     } catch (err) {

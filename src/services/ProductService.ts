@@ -14,7 +14,9 @@ export default class ProductService {
     }
   }
 
-  public async createBach(productList: [{ name }]): Promise<ProductEntity[]> {
+  public async createBatch(
+    productList: ProductEntity[]
+  ): Promise<ProductEntity[]> {
     const createdProducts = [];
     productList.forEach(async (product) => {
       if (!(await this.repository.findByName(product.name))) {

@@ -61,7 +61,7 @@ router.get("/products", productController.list);
 router.get("/products/:id", productController.show);
 router.put("/products/:id", productController.update);
 router.post("/products", productController.create);
-router.post("/many-products", productController.createBach);
+router.post("/products/batch", productController.createBatch);
 router.delete("/products/:id", productController.delete);
 
 /**
@@ -71,7 +71,7 @@ router.get("/product-quantities/list", productQuantityController.list);
 router.get("/product-quantities/:id", productQuantityController.show);
 router.put("/product-quantities/:id", productQuantityController.update);
 router.post("/product-quantities", productQuantityController.create);
-router.post("/many-product-quantities", productQuantityController.createBach);
+router.post("/product-quantities/batch", productQuantityController.createBatch);
 router.delete("/product-quantities/:id", productQuantityController.delete);
 
 /*

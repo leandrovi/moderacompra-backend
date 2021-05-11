@@ -53,13 +53,13 @@ export default class ProductController {
     }
   }
 
-  public async createBach(
+  public async createBatch(
     request: Request,
     response: Response
   ): Promise<Response> {
     try {
-      const [{ name }]: ProductEntity[] = request.body;
-      const product = await service.createBach([{ name }]);
+      const name: ProductEntity[] = request.body;
+      const product = await service.createBatch(name);
 
       return response.status(200).json(product);
     } catch (err) {
@@ -73,9 +73,9 @@ export default class ProductController {
       const { id } = request.params;
       const fields: Partial<ProductEntity> = request.body;
 
-      const product = await service.update(id, fields);
+      const products = await service.update(id, fields);
 
-      return response.json(product);
+      return response.json(products);
     } catch (err) {
       return response.status(500).json({ error: "Internal server error" });
     }
