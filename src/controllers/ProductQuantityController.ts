@@ -68,6 +68,22 @@ export default class ProductQuantityController {
     }
   }
 
+  public async createBatch(
+    request: Request,
+    response: Response
+  ): Promise<Response> {
+    try {
+      const productQttList: ProductQuantityEntity[] = request.body;
+
+      const productQtt = await service.createBatch(productQttList);
+
+      return response.json(productQtt);
+    } catch (err) {
+      console.log(err);
+      return response.status(500).json({ error: "Internal server error" });
+    }
+  }
+
   public async update(request: Request, response: Response) {
     try {
       const { id } = request.params;

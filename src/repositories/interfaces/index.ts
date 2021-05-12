@@ -6,4 +6,5 @@ export interface IRepository<T> {
   findAndCountAll(options: object): Promise<{ count: number; rows: T[] }>;
   findById(id: string): Promise<T>;
   findByEmail?(email: string): Promise<T>;
+  findByName(name: string): Promise<T>;
 }

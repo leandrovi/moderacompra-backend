@@ -10,6 +10,17 @@ export default class ProductService {
     return await this.repository.create(productQtt);
   }
 
+  public async createBatch(
+    productQttList: ProductQuantityEntity[]
+  ): Promise<ProductQuantityEntity[]> {
+    const createdProductsQtt = [];
+    productQttList.forEach(async (productQtt) => {
+      const prod = await this.repository.create(productQtt);
+      createdProductsQtt.push(prod);
+    });
+    return createdProductsQtt;
+  }
+
   public async getAll(
     options?: object
   ): Promise<{ count: number; rows: ProductQuantityEntity[] }> {

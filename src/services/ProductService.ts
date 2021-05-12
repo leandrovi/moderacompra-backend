@@ -1,12 +1,30 @@
 import { IRepository } from "../repositories/interfaces";
 import { ProductEntity } from "../entities";
+import { error } from "node:console";
 
 export default class ProductService {
   constructor(private repository: IRepository<ProductEntity>) {}
 
   public async create(product: { name }): Promise<ProductEntity> {
-    const list = await this.repository.create(product);
-    return list;
+    if (!(await this.repository.findByName(product.name))) {
+      const prod = await this.repository.create(product);
+      return prod;
+    } else {
+      throw error(`Product with name "${product.name}" already exists.`);
+    }
+  }
+
+  public async createBatch(
+    productList: ProductEntity[]
+  ): Promise<ProductEntity[]> {
+    const createdProducts = [];
+    productList.forEach(async (product) => {
+      if (!(await this.repository.findByName(product.name))) {
+        const prod = await this.repository.create(product);
+        createdProducts.push(prod);
+      }
+    });
+    return createdProducts;
   }
 
   public async getAll(
