@@ -1,6 +1,5 @@
 import { IRepository } from "../repositories/interfaces";
 import { ProductEntity } from "../entities";
-import { error } from "node:console";
 
 export default class ProductService {
   constructor(private repository: IRepository<ProductEntity>) {}
@@ -10,7 +9,7 @@ export default class ProductService {
       const prod = await this.repository.create(product);
       return prod;
     } else {
-      throw error(`Product with name "${product.name}" already exists.`);
+      throw new Error(`Product with name "${product.name}" already exists.`);
     }
   }
 
