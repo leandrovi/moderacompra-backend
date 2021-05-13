@@ -3,7 +3,9 @@ import { v4 as uuidv4 } from "uuid";
 
 import Database from "../index";
 import { ProductQuantityEntity } from "../../../entities/ProductQuantityEntity";
+
 import List from "./List";
+import Unity from "./Unity";
 
 const database = Database.getInstance();
 
@@ -79,5 +81,7 @@ ProductQuantity.belongsTo(ProductQuantity, {
   foreignKey: "product_id",
   as: "product",
 });
+
+ProductQuantity.belongsTo(Unity, { foreignKey: "id_unity", as: "unity" });
 
 export default ProductQuantity;

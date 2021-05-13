@@ -32,6 +32,7 @@ Unity.init(
   },
   {
     sequelize: database.connection,
+    timestamps: false,
   }
 );
 

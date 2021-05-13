@@ -1,22 +1,18 @@
 import { Request, Response } from "express";
 
-import { ListEntity, ProductQuantityEntity, ProductEntity } from "../entities";
-import { ListProduct, RequestOptions } from "../interfaces";
-
-import ListService from "../services/ListService";
-import ProductQuantityService from "../services/ProductQuantityService";
-import ProductService from "../services/ProductService";
+import { ListEntity } from "../entities";
+import { RequestOptions } from "../interfaces";
 
 import ListRepository from "../repositories/implementations/ListRepository";
 import ProductQuantityRepository from "../repositories/implementations/ProductQuantityRepository";
-import ProductRepository from "../repositories/implementations/ProductRepository";
 
 const listRepository = new ListRepository();
 const productQuantityRepository = new ProductQuantityRepository();
-const productRepository = new ProductRepository();
+
+import ListService from "../services/ListService";
+import ProductQuantityService from "../services/ProductQuantityService";
 
 const listService = new ListService(listRepository);
-const productService = new ProductService(productRepository);
 const productQuantityService = new ProductQuantityService(
   productQuantityRepository
 );
@@ -55,25 +51,15 @@ export default class ListController {
       const list = await listService.getById(id);
 
       const productQuantities = await productQuantityService.getAll(options, {
-        list_id: list.id
+        list_id: list.id,
       });
 
-      const listProducts: ListProduct[] = productQuantities.rows.map(async productQuantity => {
-        const product = await productService.findById(productQuantity.product_id);
-        const unity = await
-
-        return {
-          ...productQuantity,
-          product_name: product.name
-        }
-      })
-
-      const completeList = {
+      const normalizedList: ListEntity = {
         ...list,
-        products: listProducts
-      }
+        productQuantities: productQuantities.rows,
+      };
 
-      return response.status(200).json(completeList);
+      return response.status(200).json(normalizedList);
     } catch (err) {
       console.error(err);
       return response.status(500).json({ error: "Internal server error" });

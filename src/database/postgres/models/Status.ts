@@ -31,6 +31,7 @@ Status.init(
   },
   {
     sequelize: database.connection,
+    timestamps: false,
   }
 );
 
