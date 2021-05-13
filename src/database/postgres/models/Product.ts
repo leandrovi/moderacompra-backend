@@ -3,7 +3,6 @@ import { v4 as uuidv4 } from "uuid";
 
 import Database from "../index";
 import { ProductEntity } from "../../../entities/ProductEntity";
-import ProductQuantity from "./ProductQuantity";
 
 const database = Database.getInstance();
 
