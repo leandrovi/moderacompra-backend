@@ -1,5 +1,6 @@
 import { IRepository } from "../repositories/interfaces";
 import { ListEntity } from "../entities";
+import { GetAllResponse, RequestOptions } from "../interfaces";
 
 export default class ListService {
   constructor(private repository: IRepository<ListEntity>) {}
@@ -26,8 +27,8 @@ export default class ListService {
   }
 
   public async getAll(
-    options?: object
-  ): Promise<{ count: number; rows: ListEntity[] }> {
+    options: RequestOptions
+  ): Promise<GetAllResponse<ListEntity>> {
     return await this.repository.findAndCountAll(options);
   }
 
