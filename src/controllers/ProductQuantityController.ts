@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import ProductQuantityService from "../services/ProductQuantityService";
 import ProductQuantityRepository from "../repositories/implementations/ProductQuantityRepository";
 import { ProductQuantityEntity } from "../entities";
+import { RequestOptions } from "../interfaces";
 
 const repository = new ProductQuantityRepository();
 const service = new ProductQuantityService(repository);
@@ -14,9 +15,9 @@ export default class ProductQuantityController {
         ? [request.query.order.toString().split(",")]
         : null;
 
-      const options = {
-        limit: request.query.limit || 20,
-        offset: request.query.offset || 0,
+      const options: RequestOptions = {
+        limit: Number(request.query.limit) || 20,
+        offset: Number(request.query.offset) || 0,
         order: orderby,
       };
 
