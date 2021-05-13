@@ -35,3 +35,6 @@ jobs:
 
       - name: Run database migrations (stg)
         run: heroku run sequelize db:migrate --env production --app ${{ secrets.HEROKU_APP_NAME_STG }} --debug
+
+      - name: Run database seeds (stg)
+        run: heroku run sequelize db:seed:all --env production --app ${{ secrets.HEROKU_APP_NAME }} --debug

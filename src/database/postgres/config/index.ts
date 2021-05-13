@@ -9,8 +9,8 @@ const databaseCredentials = {
     password: process.env.DB_PASS,
     database: process.env.DB_NAME,
     dialectOptions: {
-      ssl: false
-    }
+      ssl: false,
+    },
   },
   test: {
     host: process.env.DB_HOST,
@@ -20,9 +20,9 @@ const databaseCredentials = {
     dialectOptions: {
       ssl: {
         require: true,
-        rejectUnauthorized: false
-      }
-    }
+        rejectUnauthorized: false,
+      },
+    },
   },
   production: {
     host: process.env.DB_HOST,
@@ -32,15 +32,19 @@ const databaseCredentials = {
     dialectOptions: {
       ssl: {
         require: true,
-        rejectUnauthorized: false
-      }
-    }
+        rejectUnauthorized: false,
+      },
+    },
   },
 };
 
-const { host, username, password, database, dialectOptions } = databaseCredentials[
-  process.env.NODE_ENV
-];
+const {
+  host,
+  username,
+  password,
+  database,
+  dialectOptions,
+} = databaseCredentials[process.env.NODE_ENV];
 
 module.exports = {
   dialect,
@@ -53,4 +57,5 @@ module.exports = {
     timestamps: true,
     underscored: true,
   },
+  seederStorage: "sequelize",
 };

@@ -17,7 +17,7 @@ jobs:
       - name: Create .env file
         run: |
           touch .env
-          echo NODE_ENV=production
+          echo NODE_ENV=production >> .env
           echo APP_SECRET=${{ secrets.APP_SECRET }} >> .env
           echo DB_HOST=${{ secrets.DB_HOST_PROD }} >> .env
           echo DB_USER=${{ secrets.DB_USER_PROD }} >> .env
@@ -35,3 +35,6 @@ jobs:
 
       - name: Run database migrations
         run: heroku run sequelize db:migrate --env production --app ${{ secrets.HEROKU_APP_NAME }}
+
+      - name: Run database seeds
+        run: heroku run sequelize db:seed:all --env production --app ${{ secrets.HEROKU_APP_NAME }}
