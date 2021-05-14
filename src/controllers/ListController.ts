@@ -43,23 +43,9 @@ export default class ListController {
     try {
       const { id } = request.params;
 
-      const options: RequestOptions = {
-        limit: Number(request.query.limit) || 20,
-        offset: Number(request.query.offset) || 0,
-      };
-
       const list = await listService.getById(id);
 
-      const productQuantities = await productQuantityService.getAll(options, {
-        list_id: list.id,
-      });
-
-      const normalizedList: ListEntity = {
-        ...list,
-        productQuantities: productQuantities.rows,
-      };
-
-      return response.status(200).json(normalizedList);
+      return response.status(200).json(list);
     } catch (err) {
       console.error(err);
       return response.status(500).json({ error: "Internal server error" });

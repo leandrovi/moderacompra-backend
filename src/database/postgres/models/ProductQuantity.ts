@@ -6,6 +6,7 @@ import { ProductQuantityEntity } from "../../../entities/ProductQuantityEntity";
 
 import List from "./List";
 import Unity from "./Unity";
+import Product from "./Product";
 
 const database = Database.getInstance();
 
@@ -75,9 +76,7 @@ ProductQuantity.addHook(
 );
 
 // Relationships
-ProductQuantity.belongsTo(List, { foreignKey: "list_id", as: "list" });
-
-ProductQuantity.belongsTo(ProductQuantity, {
+ProductQuantity.belongsTo(Product, {
   foreignKey: "product_id",
   as: "product",
 });

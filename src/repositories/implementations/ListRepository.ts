@@ -4,6 +4,7 @@ import { ListEntity } from "../../entities";
 
 import List from "../../database/postgres/models/List";
 import Status from "../../database/postgres/models/Status";
+import ProductQuantity from "../../database/postgres/models/ProductQuantity";
 
 export default class ListRepository extends BaseRepository<ListEntity> {
   constructor() {
@@ -17,6 +18,10 @@ export default class ListRepository extends BaseRepository<ListEntity> {
         {
           model: Status,
           as: "status",
+        },
+        {
+          model: ProductQuantity,
+          as: "product_quantities",
         },
       ],
     });
@@ -34,6 +39,10 @@ export default class ListRepository extends BaseRepository<ListEntity> {
           model: Status,
           as: "status",
         },
+        {
+          model: ProductQuantity,
+          as: "product_quantities",
+        },
       ],
     });
   }
@@ -44,6 +53,10 @@ export default class ListRepository extends BaseRepository<ListEntity> {
         {
           model: Status,
           as: "status",
+        },
+        {
+          model: ProductQuantity,
+          as: "product_quantities",
         },
       ],
     });

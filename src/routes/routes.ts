@@ -67,7 +67,7 @@ router.delete("/products/:id", productController.delete);
 /**
  * Quantities routes
  */
-router.get("/product-quantities/list", productQuantityController.list);
+router.get("/product-quantities", productQuantityController.list);
 router.get("/product-quantities/:id", productQuantityController.show);
 router.put("/product-quantities/:id", productQuantityController.update);
 router.post("/product-quantities", productQuantityController.create);

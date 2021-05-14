@@ -21,10 +21,6 @@ export default class ProductQuantityRepository extends BaseRepository<ProductQua
       ...options,
       include: [
         {
-          model: Product,
-          as: "product",
-        },
-        {
           model: Unity,
           as: "unity",
         },
