@@ -20,9 +20,9 @@ export default class ProductService {
   public async createBatch(
     productList: ProductEntity[]
   ): Promise<ProductEntity[]> {
-    const products = [];
+    const products: ProductEntity[] = [];
 
-    productList.forEach(async (product) => {
+    for (const product of productList) {
       let newProduct = await this.repository.findByName(product.name);
 
       if (!newProduct) {
@@ -30,7 +30,7 @@ export default class ProductService {
       }
 
       products.push(newProduct);
-    });
+    }
 
     return products;
   }
