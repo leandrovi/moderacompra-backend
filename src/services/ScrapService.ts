@@ -31,7 +31,9 @@ export default class ScrapService {
       const unit_product: ProductScrap = {
         description: name_product.toString(),
         code: code_product.match(regex1).toString(),
-        quantity: Number.parseInt(quant_product.match(regex1).toString()),
+        quantity: Number.parseFloat(
+          quant_product.match(regex1).toString().replace(",", ".")
+        ),
         unity_measure: un_measure,
         unitary_value: Number.parseFloat(
           unity_val.match(regex1).toString().replace(",", ".")
