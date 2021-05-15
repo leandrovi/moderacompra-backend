@@ -11,19 +11,12 @@ export default class ListService {
   ): Promise<ListEntity> {
     const { user_id, id_status } = fields;
 
-    if (!isFirstList) {
-      const list = await this.repository.create({
-        user_id,
-        id_status,
-      });
-      return list;
-    } else {
-      const list = await this.repository.create({
-        user_id,
-        id_status: 2,
-      });
-      return list;
-    }
+    const list = await this.repository.create({
+      user_id,
+      id_status: isFirstList ? 2 : id_status,
+    });
+
+    return list;
   }
 
   public async getAll(

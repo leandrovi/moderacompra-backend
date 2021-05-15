@@ -1,12 +1,20 @@
 import { Request, Response } from "express";
 
-import ProductQuantityService from "../services/ProductQuantityService";
-import ProductQuantityRepository from "../repositories/implementations/ProductQuantityRepository";
 import { ProductQuantityEntity } from "../entities";
 import { RequestOptions } from "../interfaces";
 
-const repository = new ProductQuantityRepository();
-const service = new ProductQuantityService(repository);
+import ProductQuantityRepository from "../repositories/implementations/ProductQuantityRepository";
+import UnityRepository from "../repositories/implementations/UnityRepository";
+
+import ProductQuantityService from "../services/ProductQuantityService";
+
+const productQuantityRepository = new ProductQuantityRepository();
+const unityRepository = new UnityRepository();
+
+const service = new ProductQuantityService(
+  productQuantityRepository,
+  unityRepository
+);
 
 export default class ProductQuantityController {
   public async list(request: Request, response: Response) {
@@ -51,7 +59,7 @@ export default class ProductQuantityController {
         initial_quantity,
         final_quantity,
         suggestion_quantity,
-        id_unity,
+        unity,
       }: ProductQuantityEntity = request.body;
 
       const productQtt = await service.create({
@@ -60,7 +68,7 @@ export default class ProductQuantityController {
         initial_quantity,
         final_quantity,
         suggestion_quantity,
-        id_unity,
+        unity,
       });
 
       return response.json(productQtt);

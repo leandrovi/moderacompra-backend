@@ -24,6 +24,10 @@ export default class ProductQuantityRepository extends BaseRepository<ProductQua
           model: Unity,
           as: "unity",
         },
+        {
+          model: Product,
+          as: "product",
+        },
       ],
     });
   }
