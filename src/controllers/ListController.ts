@@ -46,7 +46,7 @@ export default class ListController {
 
   public async create(request: Request, response: Response): Promise<Response> {
     try {
-      const { user_id }: ListEntity = request.body;
+      const { id: user_id }: ListEntity = request.user;
       const { isFirstList } = request.body;
 
       const list = await listService.createList({ user_id }, isFirstList);

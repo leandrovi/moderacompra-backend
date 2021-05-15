@@ -3,6 +3,12 @@ import jwt from "jsonwebtoken";
 
 import authConfig from "../config";
 
+interface DecodedJWT {
+  id: string;
+  iat: number;
+  exp: number;
+}
+
 export default async (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.headers.authorization;
 
@@ -13,12 +19,16 @@ export default async (req: Request, res: Response, next: NextFunction) => {
   const [, token] = authHeader.split(" ");
 
   try {
-    const decoded = jwt.verify(token, authConfig.secret);
+    const { id }: DecodedJWT = jwt.verify(
+      token,
+      authConfig.secret
+    ) as DecodedJWT;
 
-    console.log(decoded);
+    req.user = { id };
 
     return next();
   } catch (err) {
+    console.log(err);
     return res.status(401).json({ error: "Token invalid." });
   }
 };
