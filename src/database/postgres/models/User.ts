@@ -53,7 +53,7 @@ User.init(
     },
     id_behaviour: {
       type: Sequelize.STRING,
-      allowNull: false,
+      allowNull: true,
     },
   },
   {

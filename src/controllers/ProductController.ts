@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import ProductService from "../services/ProductService";
 import ProductRepository from "../repositories/implementations/ProductRepository";
 import { ProductEntity } from "../entities";
+import { RequestOptions } from "../interfaces";
 
 const repository = new ProductRepository();
 const service = new ProductService(repository);
@@ -14,9 +15,9 @@ export default class ProductController {
         ? [request.query.order.toString().split(",")]
         : null;
 
-      const options = {
-        limit: request.query.limit || 20,
-        offset: request.query.offset || 0,
+      const options: RequestOptions = {
+        limit: Number(request.query.limit) || 20,
+        offset: Number(request.query.offset) || 0,
         order: orderby,
       };
 
@@ -44,6 +45,7 @@ export default class ProductController {
   public async create(request: Request, response: Response): Promise<Response> {
     try {
       const { name }: ProductEntity = request.body;
+
       const product = await service.create({ name });
 
       return response.status(200).json(product);
@@ -59,6 +61,7 @@ export default class ProductController {
   ): Promise<Response> {
     try {
       const products: ProductEntity[] = request.body;
+
       const product = await service.createBatch(products);
 
       return response.status(200).json(product);

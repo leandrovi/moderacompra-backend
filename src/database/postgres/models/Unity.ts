@@ -2,32 +2,29 @@ import Sequelize, { Model, Optional } from "sequelize";
 import { v4 as uuidv4 } from "uuid";
 
 import Database from "../index";
-import { ProductEntity } from "../../../entities/ProductEntity";
+import { UnityEntity } from "../../../entities/UnityEntity";
 
 const database = Database.getInstance();
 
-interface ProductCreationAttributes extends Optional<ProductEntity, "id"> {}
+interface UnityCreationAttributes extends Optional<UnityEntity, "id"> {}
 
 // Define the attributes and methods
-class Product
-  extends Model<ProductEntity, ProductCreationAttributes>
-  implements ProductEntity {
+class Unity
+  extends Model<UnityEntity, UnityCreationAttributes>
+  implements UnityEntity {
   public id: string;
-  public name: string;
-
-  public readonly created_at?: Date;
-  public readonly updated_at?: Date;
+  public description: string;
 }
 
 // Initialize the model for sequelize
-Product.init(
+Unity.init(
   {
     id: {
       type: Sequelize.UUIDV4,
       unique: true,
       primaryKey: true,
     },
-    name: {
+    description: {
       type: Sequelize.STRING,
       unique: true,
       primaryKey: true,
@@ -35,12 +32,14 @@ Product.init(
   },
   {
     sequelize: database.connection,
+    timestamps: false,
+    tableName: "unities",
   }
 );
 
 // Dealing with custom actions on hooks
-Product.addHook("beforeCreate", (Product: Product): void => {
-  Product.id = uuidv4();
+Unity.addHook("beforeCreate", (Unity: Unity): void => {
+  Unity.id = uuidv4();
 });
 
-export default Product;
+export default Unity;

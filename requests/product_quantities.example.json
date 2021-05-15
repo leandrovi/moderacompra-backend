@@ -1,0 +1,110 @@
+[
+    {
+      "list_id": "0b425562-62bb-4e8d-9a34-763a5d0d07db",
+      "product_id": "0d1bd8e3-1681-493b-856e-d03dd7ac2da5",
+      "name": "Bacon",
+      "initial_quantity": 1,
+      "unity": {
+        "description": "KG"
+      }
+    },
+    {
+      "list_id": "0b425562-62bb-4e8d-9a34-763a5d0d07db",
+      "product_id": "55f88dd0-847e-4566-9881-56fd23484799",
+      "name": "Pimentão vermelho",
+      "initial_quantity": 1,
+      "unity": {
+        "description": "KG"
+      }
+    },
+    {
+      "list_id": "0b425562-62bb-4e8d-9a34-763a5d0d07db",
+      "product_id": "ecdc81dd-e67c-4f68-9701-9abd85928566",
+      "name": "Pimentão verde",
+      "initial_quantity": 1,
+      "unity": {
+        "description": "KG"
+      }
+    },
+    {
+      "list_id": "0b425562-62bb-4e8d-9a34-763a5d0d07db",
+      "product_id": "d1ba0371-692b-42a5-97d5-50ee45a83789",
+      "name": "Amendoin salgado",
+      "initial_quantity": 1,
+      "unity": {
+        "description": "KG"
+      }
+    },
+    {
+      "list_id": "0b425562-62bb-4e8d-9a34-763a5d0d07db",
+      "product_id": "abd66104-9710-4780-994d-e701c85bcb27",
+      "name": "Champignon",
+      "initial_quantity": 1,
+      "unity": {
+        "description": "UN"
+      }
+    },
+    {
+      "list_id": "0b425562-62bb-4e8d-9a34-763a5d0d07db",
+      "product_id": "014d1fb0-3809-4707-b1bd-251a7dd75851",
+      "name": "Batata",
+      "initial_quantity": 1,
+      "unity": {
+        "description": "KG"
+      }
+    },
+    {
+      "list_id": "0b425562-62bb-4e8d-9a34-763a5d0d07db",
+      "product_id": "75a6145a-ff12-40b3-b67d-d2cdf39e3cab",
+      "name": "Gengibre",
+      "initial_quantity": 1,
+      "unity": {
+        "description": "KG"
+      }
+    },
+    {
+      "list_id": "0b425562-62bb-4e8d-9a34-763a5d0d07db",
+      "product_id": "e21ff5b2-78de-43d4-9e15-61243ee333f3",
+      "name": "Cebolinha",
+      "initial_quantity": 1,
+      "unity": {
+        "description": "UN"
+      }
+    },
+    {
+      "list_id": "0b425562-62bb-4e8d-9a34-763a5d0d07db",
+      "product_id": "f1362c3e-8d0d-4a8a-afeb-e886bf4d2534",
+      "name": "Açúcar",
+      "initial_quantity": 1,
+      "unity": {
+        "description": "UN"
+      }
+    },
+    {
+      "list_id": "0b425562-62bb-4e8d-9a34-763a5d0d07db",
+      "product_id": "137613b8-ae87-489f-98e3-272a0474df8a",
+      "name": "Azeite",
+      "initial_quantity": 1,
+      "unity": {
+        "description": "UN"
+      }
+    },
+    {
+      "list_id": "0b425562-62bb-4e8d-9a34-763a5d0d07db",
+      "product_id": "79716b29-6295-4cdc-a800-6544ef5ed5d1",
+      "name": "Molho shoyu",
+      "initial_quantity": 1,
+      "unity": {
+        "description": "UN"
+      }
+    },
+    {
+      "list_id": "0b425562-62bb-4e8d-9a34-763a5d0d07db",
+      "product_id": "eb398025-0a2e-4455-b8b9-52df0fdb5c14",
+      "name": "Caldo de galinha",
+      "initial_quantity": 1,
+      "unity": {
+        "description": "UN"
+      }
+    }
+  ]

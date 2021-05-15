@@ -26,19 +26,26 @@ export abstract class BaseRepository<T> implements IRepository<T> {
     return !!result;
   }
 
-  async find(): Promise<T[]> {
-    return await this.BaseModel.findAll();
+  async find(filter?: Partial<T>): Promise<T[]> {
+    return await this.BaseModel.findAll({
+      where: filter,
+    });
   }
 
   async findAndCountAll(
-    options?: object
+    options?: object,
+    filter?: Partial<T>
   ): Promise<{ count: number; rows: T[] }> {
-    return await this.BaseModel.findAndCountAll(options);
+    return await this.BaseModel.findAndCountAll({
+      where: filter,
+      ...options,
+    });
   }
 
   async findById(id: string): Promise<T> {
     return await this.BaseModel.findByPk(id);
   }
+
   async findByName(name: string): Promise<T> {
     return await this.BaseModel.findByPk(name);
   }

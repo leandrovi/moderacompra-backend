@@ -1,11 +1,20 @@
 import { Request, Response } from "express";
 
-import ProductQuantityService from "../services/ProductQuantityService";
-import ProductQuantityRepository from "../repositories/implementations/ProductQuantityRepository";
 import { ProductQuantityEntity } from "../entities";
+import { RequestOptions } from "../interfaces";
 
-const repository = new ProductQuantityRepository();
-const service = new ProductQuantityService(repository);
+import ProductQuantityRepository from "../repositories/implementations/ProductQuantityRepository";
+import UnityRepository from "../repositories/implementations/UnityRepository";
+
+import ProductQuantityService from "../services/ProductQuantityService";
+
+const productQuantityRepository = new ProductQuantityRepository();
+const unityRepository = new UnityRepository();
+
+const service = new ProductQuantityService(
+  productQuantityRepository,
+  unityRepository
+);
 
 export default class ProductQuantityController {
   public async list(request: Request, response: Response) {
@@ -14,9 +23,9 @@ export default class ProductQuantityController {
         ? [request.query.order.toString().split(",")]
         : null;
 
-      const options = {
-        limit: request.query.limit || 20,
-        offset: request.query.offset || 0,
+      const options: RequestOptions = {
+        limit: Number(request.query.limit) || 20,
+        offset: Number(request.query.offset) || 0,
         order: orderby,
       };
 
@@ -24,6 +33,7 @@ export default class ProductQuantityController {
 
       return response.status(200).json(productQtt);
     } catch (err) {
+      console.log(err);
       return response.status(500).json({ error: "Internal server error" });
     }
   }
@@ -49,7 +59,7 @@ export default class ProductQuantityController {
         initial_quantity,
         final_quantity,
         suggestion_quantity,
-        id_unity,
+        unity,
       }: ProductQuantityEntity = request.body;
 
       const productQtt = await service.create({
@@ -58,7 +68,7 @@ export default class ProductQuantityController {
         initial_quantity,
         final_quantity,
         suggestion_quantity,
-        id_unity,
+        unity,
       });
 
       return response.json(productQtt);

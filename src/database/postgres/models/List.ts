@@ -3,7 +3,10 @@ import { v4 as uuidv4 } from "uuid";
 
 import Database from "../index";
 import { ListEntity } from "../../../entities/ListEntity";
+
 import User from "./User";
+import Status from "./Status";
+import ProductQuantity from "./ProductQuantity";
 
 const database = Database.getInstance();
 
@@ -50,5 +53,9 @@ List.addHook("beforeCreate", (List: List): void => {
 
 // Relationships
 List.belongsTo(User, { foreignKey: "user_id", as: "user" });
+
+List.belongsTo(Status, { foreignKey: "id_status", as: "status" });
+
+List.hasMany(ProductQuantity, { as: "product_quantities" });
 
 export default List;

@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import UserService from "../services/UserService";
 import UserRepository from "../repositories/implementations/UserRepository";
 import { UserEntity } from "../entities";
+import { RequestOptions } from "../interfaces";
 
 const repository = new UserRepository();
 const service = new UserService(repository);
@@ -14,9 +15,9 @@ export default class UserController {
         ? [request.query.order.toString().split(",")]
         : null;
 
-      const options = {
-        limit: request.query.limit || 20,
-        offset: request.query.offset || 0,
+      const options: RequestOptions = {
+        limit: Number(request.query.limit) || 20,
+        offset: Number(request.query.offset) || 0,
         order: orderby,
       };
 
