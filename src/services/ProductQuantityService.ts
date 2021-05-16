@@ -1,24 +1,66 @@
 import { IRepository } from "../repositories/interfaces";
-import { ProductQuantityEntity } from "../entities";
+import { ProductQuantityEntity, UnityEntity } from "../entities";
+import { GetAllResponse, RequestOptions } from "../interfaces";
 
 export default class ProductService {
-  constructor(private repository: IRepository<ProductQuantityEntity>) {}
+  constructor(
+    private productQuantityRepository: IRepository<ProductQuantityEntity>,
+    private unityRepository: IRepository<UnityEntity>
+  ) {}
 
   public async create(
     productQtt: ProductQuantityEntity
   ): Promise<ProductQuantityEntity> {
-    return await this.repository.create(productQtt);
+    return await this.productQuantityRepository.create(productQtt);
   }
 
-  public async getAll(): Promise<ProductQuantityEntity[]> {
-    return await this.repository.find();
+  public async createBatch(
+    productQttList: ProductQuantityEntity[]
+  ): Promise<ProductQuantityEntity[]> {
+    const productQuantities: ProductQuantityEntity[] = [];
+
+    for (const productQuantity of productQttList) {
+      // Check for unity, if doesn't exists, I'll create it
+      let [unity] = await this.unityRepository.find({
+        description: productQuantity.unity.description,
+      });
+
+      if (!unity) {
+        unity = await this.unityRepository.create({
+          description: productQuantity.unity.description,
+        });
+      }
+
+      const newProductQuantity = await this.productQuantityRepository.create({
+        ...productQuantity,
+        id_unity: unity.id,
+        final_quantity: 0,
+        suggestion_quantity: 0,
+      });
+
+      productQuantities.push(newProductQuantity);
+    }
+
+    return productQuantities;
+  }
+
+  public async getAll(
+    options?: RequestOptions,
+    filter?: Partial<ProductQuantityEntity>
+  ): Promise<GetAllResponse<ProductQuantityEntity>> {
+    return await this.productQuantityRepository.findAndCountAll(
+      options,
+      filter
+    );
   }
 
   public async findById(id: string): Promise<ProductQuantityEntity> {
-    const data = await this.repository.findById(id);
+    const data = await this.productQuantityRepository.findById(id);
+
     if (!data) {
       throw new Error("Product not found");
     }
+
     return data;
   }
 
@@ -26,18 +68,22 @@ export default class ProductService {
     id: string,
     fields: Partial<ProductQuantityEntity>
   ): Promise<ProductQuantityEntity> {
-    const exist = await this.repository.findById(id);
-    if (!exist) {
+    const exists = await this.productQuantityRepository.findById(id);
+
+    if (!exists) {
       throw new Error("Product quantity not found");
     }
-    return await this.repository.update(id, fields);
+
+    return await this.productQuantityRepository.update(id, fields);
   }
 
   public async delete(id: string): Promise<boolean> {
-    const exist = await this.repository.findById(id);
-    if (!exist) {
+    const exists = await this.productQuantityRepository.findById(id);
+
+    if (!exists) {
       throw new Error("Product quantity not found");
     }
-    return await this.repository.delete(id);
+
+    return await this.productQuantityRepository.delete(id);
   }
 }

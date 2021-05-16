@@ -1,7 +1,7 @@
 name: Deploy Staging
 
 on:
-  push:
+  pull_request:
     branches:
       - staging
 
@@ -34,4 +34,7 @@ jobs:
           env_file: ".env"
 
       - name: Run database migrations (stg)
-        run: heroku run sequelize db:migrate --env production --app ${{ secrets.HEROKU_APP_NAME_STG }}
+        run: heroku run sequelize db:migrate --env production --app ${{ secrets.HEROKU_APP_NAME_STG }} --debug
+
+      - name: Run database seeds (stg)
+        run: heroku run sequelize db:seed:all --env production --app ${{ secrets.HEROKU_APP_NAME }} --debug

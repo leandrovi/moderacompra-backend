@@ -6,12 +6,19 @@
   "type": "commonjs",
   "scripts": {
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts",
-    "migration:create": "npx sequelize-cli migration:generate",
+
+    "migration:create": "npx sequelize-cli migration:generate --name",
     "migration:run": "npx sequelize-cli db:migrate",
     "migration:undo": "npx sequelize-cli db:migrate:undo",
+
+    "seed:create": "npx sequelize-cli seed:generate --name",
+    "seed:run": "npx sequelize-cli db:seed:all",
+    "seed:undo": "npx sequelize-cli db:seed:undo:all",
+
     "postinstall": "tsc",
     "watch-node": "nodemon dist/index.js",
     "watch-ts": "tsc -w",
+
     "heroku-prebuild": "npm install pm2 -g",
     "start": "pm2-runtime start ./dist/server.js --env production"
   },
@@ -22,8 +29,10 @@
     "@types/bcrypt": "^3.0.0",
     "@types/jsonwebtoken": "^8.5.1",
     "@types/uuid": "^8.3.0",
+    "axios": "^0.21.1",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
+    "cheerio": "^1.0.0-rc.6",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",

@@ -3,7 +3,10 @@ import { v4 as uuidv4 } from "uuid";
 
 import Database from "../index";
 import { ProductQuantityEntity } from "../../../entities/ProductQuantityEntity";
+
 import List from "./List";
+import Unity from "./Unity";
+import Product from "./Product";
 
 const database = Database.getInstance();
 
@@ -18,9 +21,9 @@ class ProductQuantity
   public list_id: string;
   public product_id: string;
   public initial_quantity: number;
-  public final_quantity?: number;
-  public suggestion_quantity?: number;
-  public local_price?: number;
+  public final_quantity: number;
+  public suggestion_quantity: number;
+  public id_unity?: string;
 
   public readonly created_at?: Date;
   public readonly updated_at?: Date;
@@ -54,9 +57,9 @@ ProductQuantity.init(
       type: Sequelize.NUMBER,
       allowNull: true,
     },
-    local_price: {
-      type: Sequelize.NUMBER,
-      allowNull: true,
+    id_unity: {
+      type: Sequelize.STRING,
+      allowNull: false,
     },
   },
   {
@@ -73,12 +76,11 @@ ProductQuantity.addHook(
 );
 
 // Relationships
-ProductQuantity.belongsTo(List, { foreignKey: "list_id", as: "list" });
-
-// Relationships
-ProductQuantity.belongsTo(ProductQuantity, {
+ProductQuantity.belongsTo(Product, {
   foreignKey: "product_id",
   as: "product",
 });
+
+ProductQuantity.belongsTo(Unity, { foreignKey: "id_unity", as: "unity" });
 
 export default ProductQuantity;

@@ -1,23 +1,28 @@
 import { IRepository } from "../repositories/interfaces";
 import { ListEntity } from "../entities";
+import { GetAllResponse, RequestOptions } from "../interfaces";
 
 export default class ListService {
   constructor(private repository: IRepository<ListEntity>) {}
 
-  public async createList(fields: Partial<ListEntity>): Promise<ListEntity> {
-    const { user_id, month, day } = fields;
+  public async createList(
+    fields: Partial<ListEntity>,
+    isFirstList: boolean
+  ): Promise<ListEntity> {
+    const { user_id, id_status } = fields;
 
     const list = await this.repository.create({
       user_id,
-      month,
-      day,
+      id_status: isFirstList ? 2 : id_status,
     });
 
     return list;
   }
 
-  public async getAll(): Promise<ListEntity[]> {
-    return await this.repository.find();
+  public async getAll(
+    options: RequestOptions
+  ): Promise<GetAllResponse<ListEntity>> {
+    return await this.repository.findAndCountAll(options);
   }
 
   public async getById(id: string): Promise<ListEntity> {

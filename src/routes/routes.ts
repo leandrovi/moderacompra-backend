@@ -5,6 +5,8 @@ import SessionController from "../controllers/SessionController";
 import ListController from "../controllers/ListController";
 import ProductController from "../controllers/ProductController";
 import ProductQuantityController from "../controllers/ProductQuantityController";
+import authMiddleware from "../middlewares/auth";
+import ScrapController from "../controllers/ScrapController";
 
 const router = express.Router();
 
@@ -13,8 +15,7 @@ const sessionController = new SessionController();
 const listController = new ListController();
 const productController = new ProductController();
 const productQuantityController = new ProductQuantityController();
-
-import authMiddleware from "../middlewares/auth";
+const scrapController = new ScrapController();
 
 /**
  * Open Routes without authentication
@@ -60,15 +61,22 @@ router.get("/products", productController.list);
 router.get("/products/:id", productController.show);
 router.put("/products/:id", productController.update);
 router.post("/products", productController.create);
+router.post("/products/batch", productController.createBatch);
 router.delete("/products/:id", productController.delete);
 
 /**
  * Quantities routes
  */
-router.get("/product-quantities/list", productQuantityController.list);
+router.get("/product-quantities", productQuantityController.list);
 router.get("/product-quantities/:id", productQuantityController.show);
 router.put("/product-quantities/:id", productQuantityController.update);
 router.post("/product-quantities", productQuantityController.create);
+router.post("/product-quantities/batch", productQuantityController.createBatch);
 router.delete("/product-quantities/:id", productQuantityController.delete);
+
+/*
+ * Scrap routes
+ */
+router.post("/scrap", scrapController.parseNote);
 
 export = router;

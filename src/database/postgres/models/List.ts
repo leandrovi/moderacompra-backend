@@ -3,7 +3,10 @@ import { v4 as uuidv4 } from "uuid";
 
 import Database from "../index";
 import { ListEntity } from "../../../entities/ListEntity";
+
 import User from "./User";
+import Status from "./Status";
+import ProductQuantity from "./ProductQuantity";
 
 const database = Database.getInstance();
 
@@ -15,8 +18,7 @@ class List
   implements ListEntity {
   public id: string;
   public user_id: string;
-  public month: number;
-  public day: number;
+  public id_status: number;
 
   public readonly created_at?: Date;
   public readonly updated_at?: Date;
@@ -34,13 +36,9 @@ List.init(
       type: Sequelize.STRING,
       allowNull: true,
     },
-    month: {
-      type: Sequelize.INTEGER,
-      allowNull: false,
-    },
-    day: {
-      type: Sequelize.INTEGER,
-      allowNull: false,
+    id_status: {
+      type: Sequelize.NUMBER,
+      allowNull: true,
     },
   },
   {
@@ -55,5 +53,9 @@ List.addHook("beforeCreate", (List: List): void => {
 
 // Relationships
 List.belongsTo(User, { foreignKey: "user_id", as: "user" });
+
+List.belongsTo(Status, { foreignKey: "id_status", as: "status" });
+
+List.hasMany(ProductQuantity, { as: "product_quantities" });
 
 export default List;
