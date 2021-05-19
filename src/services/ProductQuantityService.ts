@@ -77,6 +77,27 @@ export default class ProductService {
     return await this.productQuantityRepository.update(id, fields);
   }
 
+  public async updateBatch(
+    productQttToUpdate: [{ id: string; fields: Partial<ProductQuantityEntity> }]
+  ): Promise<ProductQuantityEntity[]> {
+    const productQuantities: ProductQuantityEntity[] = [];
+
+    for (const productQuantity of productQttToUpdate) {
+      const exists = await this.productQuantityRepository.findById(
+        productQuantity.id
+      );
+
+      if (exists) {
+        const updatedProductQtt = await this.productQuantityRepository.update(
+          productQuantity.id,
+          productQuantity.fields
+        );
+        productQuantities.push(updatedProductQtt);
+      }
+    }
+    return productQuantities;
+  }
+
   public async delete(id: string): Promise<boolean> {
     const exists = await this.productQuantityRepository.findById(id);
 
