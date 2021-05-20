@@ -70,6 +70,7 @@ router.delete("/products/:id", productController.delete);
 router.get("/product-quantities", productQuantityController.list);
 router.get("/product-quantities/:id", productQuantityController.show);
 router.put("/product-quantities/:id", productQuantityController.update);
+router.put("/product-quantities/close", productQuantityController.close);
 router.post("/product-quantities", productQuantityController.create);
 router.post("/product-quantities/batch", productQuantityController.createBatch);
 router.delete("/product-quantities/:id", productQuantityController.delete);

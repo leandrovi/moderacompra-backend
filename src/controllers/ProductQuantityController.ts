@@ -107,6 +107,20 @@ export default class ProductQuantityController {
     }
   }
 
+  public async close(request: Request, response: Response) {
+    try {
+      const productQttList: ProductQuantityEntity[] = request.body;
+
+      const finalQttUpdate = await service.updateBatch(productQttList);
+
+      const suggestionQttUpdate = await service.updateSugestion(finalQttUpdate);
+
+      return response.json(suggestionQttUpdate);
+    } catch (err) {
+      return response.status(500).json({ error: "Internal server error" });
+    }
+  }
+
   public async delete(request: Request, response: Response) {
     try {
       const { id } = request.params;
