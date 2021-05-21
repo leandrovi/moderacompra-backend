@@ -111,11 +111,13 @@ export default class ProductQuantityController {
     try {
       const productQttList: ProductQuantityEntity[] = request.body;
 
-      const finalQttUpdate = await service.updateBatch(productQttList);
+      const updatedProductQttList = await service.updateBatch(productQttList);
 
-      const suggestionQttUpdate = await service.updateSugestion(finalQttUpdate);
+      const newProductQuantities = await service.updateSuggestion(
+        updatedProductQttList
+      );
 
-      return response.json(suggestionQttUpdate);
+      return response.json(newProductQuantities);
     } catch (err) {
       return response.status(500).json({ error: "Internal server error" });
     }

@@ -98,17 +98,19 @@ export default class ProductService {
     return productQuantities;
   }
 
-  public async updateSugestion(
+  public async updateSuggestion(
     suggestionToUpdate: ProductQuantityEntity[]
   ): Promise<ProductQuantityEntity[]> {
     const suggestionQttList: Partial<ProductQuantityEntity>[] = [];
 
     for (const productQuantity of suggestionToUpdate) {
-      var suggestionQtt =
-        productQuantity.initial_quantity -
-        (productQuantity.initial_quantity - productQuantity.final_quantity);
+      const initial = productQuantity.initial_quantity;
+      const final = productQuantity.final_quantity;
+      const consumed = initial - final;
+      const suggestion = consumed - final;
+
       suggestionQttList.push({
-        suggestion_quantity: suggestionQtt,
+        suggestion_quantity: suggestion,
       });
     }
 
