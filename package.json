@@ -6,19 +6,15 @@
   "type": "commonjs",
   "scripts": {
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts",
-
     "migration:create": "npx sequelize-cli migration:generate --name",
     "migration:run": "npx sequelize-cli db:migrate",
     "migration:undo": "npx sequelize-cli db:migrate:undo",
-
     "seed:create": "npx sequelize-cli seed:generate --name",
     "seed:run": "npx sequelize-cli db:seed:all",
     "seed:undo": "npx sequelize-cli db:seed:undo:all",
-
     "postinstall": "tsc",
     "watch-node": "nodemon dist/index.js",
     "watch-ts": "tsc -w",
-
     "heroku-prebuild": "npm install pm2 -g",
     "start": "pm2-runtime start ./dist/server.js --env production"
   },
