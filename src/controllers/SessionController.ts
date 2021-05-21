@@ -18,7 +18,7 @@ export default class SessionController {
       return response.json({ token: auth });
     } catch (err) {
       console.error(err);
-      if (err == 401) {
+      if (err == "401") {
         return response.status(401).json({ error: "Invalid credentials" });
       }
 

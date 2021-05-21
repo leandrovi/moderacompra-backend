@@ -1,5 +1,4 @@
 import bcrypt from "bcrypt";
-import { error } from "console";
 import jwt from "jsonwebtoken";
 import authConfig from "../config";
 import { UserEntity } from "../entities/UserEntity";
@@ -18,7 +17,7 @@ export default class SessionService {
     );
 
     if (!isValidPassword) {
-      throw error(401);
+      throw new Error("401");
     }
 
     const token = jwt.sign({ id: user.id }, authConfig.secret, {
