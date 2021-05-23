@@ -95,6 +95,7 @@ export default class ProductService {
         productQuantities.push(updatedProductQtt);
       }
     }
+
     return productQuantities;
   }
 
