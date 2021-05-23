@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 
 import UserService from "../services/UserService";
+import AmazonService from "../services/AmazonSerivce";
 import UserRepository from "../repositories/implementations/UserRepository";
 import { UserEntity } from "../entities";
 import { RequestOptions } from "../interfaces";
@@ -64,6 +65,29 @@ export default class UserController {
       const list = await service.updateUser(id, fields);
 
       return response.json(list);
+    } catch (err) {
+      console.error(err);
+      return response.status(500).json({ error: "Internal server error" });
+    }
+  }
+
+  public async sendImg(
+    request: Request,
+    response: Response
+  ): Promise<Response> {
+    try {
+      const awsService = new AmazonService();
+      const { id } = request.params;
+
+      const fileName = request.file.name; //os dados do arquivo ainda não chegam aqui
+      const file = request.file; //os dados do arquivo ainda não chegam aqui
+
+      const imgData = await awsService.sendImg(fileName, file);
+
+      const fields: Partial<UserEntity> = { picture: imgData };
+      const updatedPictureUrl = await service.updateUser(id, fields);
+
+      return response.json(updatedPictureUrl);
     } catch (err) {
       console.error(err);
       return response.status(500).json({ error: "Internal server error" });
