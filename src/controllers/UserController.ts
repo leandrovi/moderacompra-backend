@@ -78,13 +78,14 @@ export default class UserController {
     try {
       const awsService = new AmazonService();
       const { id } = request.params;
+      console.log(request.file);
 
-      const fileName = request.file.name; //os dados do arquivo ainda não chegam aqui
+      const fileName = request.file.originalname; //os dados do arquivo ainda não chegam aqui
       const file = request.file; //os dados do arquivo ainda não chegam aqui
 
       const imgData = await awsService.sendImg(fileName, file);
 
-      const fields: Partial<UserEntity> = { picture: imgData };
+      const fields: Partial<UserEntity> = { picture: imgData.Location };
       const updatedPictureUrl = await service.updateUser(id, fields);
 
       return response.json(updatedPictureUrl);
