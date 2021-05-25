@@ -1,4 +1,5 @@
 import express from "express";
+const multer = require("multer");
 
 import UserController from "../controllers/UserController";
 import SessionController from "../controllers/SessionController";
@@ -32,7 +33,7 @@ router.get("/health", (req, res) => {
 
 router.post("/sessions", sessionController.authenticate);
 
-router.use(authMiddleware);
+//router.use(authMiddleware);
 
 /**
  * Routes that need authentication
@@ -41,10 +42,18 @@ router.use(authMiddleware);
 /**
  * Users routes
  */
+const storage = multer.memoryStorage({
+  destination: function (req, file, callback) {
+    callback(null, "");
+  },
+});
+const file = multer({ storage }).single("file");
+
 router.get("/users", userController.list);
 router.get("/users/:id", userController.show);
 router.put("/users/:id", userController.update);
 router.post("/users", userController.create);
+router.post("/users/image/:id", file, userController.sendImg);
 
 /**
  * Lists routes
