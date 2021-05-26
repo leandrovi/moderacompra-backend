@@ -1,5 +1,5 @@
 export default {
-  AWS_ID: "AKIA5IFD2BLRYPSRAM4S",
-  AWS_SECRET: "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",
-  AWS_BUCKET_NAME: "profilepicturemodera",
+  AWS_ID: process.env.AWS_ACCESS_KEY_ID,
+  AWS_SECRET: process.env.AWS_SECRET_ACCESS_KEY,
+  AWS_BUCKET_NAME: process.env.AWS_BUCKET_NAME,
 };

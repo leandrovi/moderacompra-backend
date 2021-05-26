@@ -20,6 +20,7 @@ class User
   public password: string;
   public password_hash: string;
   public id_behaviour: string;
+  public picture: string;
 
   public readonly created_at?: Date;
   public readonly updated_at?: Date;
@@ -52,6 +53,10 @@ User.init(
       allowNull: true,
     },
     id_behaviour: {
+      type: Sequelize.STRING,
+      allowNull: true,
+    },
+    picture: {
       type: Sequelize.STRING,
       allowNull: true,
     },

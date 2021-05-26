@@ -12,11 +12,12 @@ export abstract class BaseRepository<T> implements IRepository<T> {
   }
 
   async update(id: string, fields: Partial<T>): Promise<T> {
+    console.log("id", id);
     const [, list] = await this.BaseModel.update(fields, {
       where: { id },
       returning: true,
     });
-
+    console.log(list);
     return list[0];
   }
 

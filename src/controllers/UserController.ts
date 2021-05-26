@@ -71,7 +71,7 @@ export default class UserController {
     }
   }
 
-  public async sendImg(
+  public async updatePicture(
     request: Request,
     response: Response
   ): Promise<Response> {
@@ -86,9 +86,9 @@ export default class UserController {
       const imgData = await awsService.sendImg(fileName, file);
 
       const fields: Partial<UserEntity> = { picture: imgData.Location };
-      const updatedPictureUrl = await service.updateUser(id, fields);
+      const user = await service.updateUser(id, fields);
 
-      return response.json(updatedPictureUrl);
+      return response.json(user);
     } catch (err) {
       console.error(err);
       return response.status(500).json({ error: "Internal server error" });
