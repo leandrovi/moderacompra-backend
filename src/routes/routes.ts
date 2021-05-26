@@ -1,5 +1,5 @@
 import express from "express";
-const multer = require("multer");
+import multer from "multer";
 
 import UserController from "../controllers/UserController";
 import SessionController from "../controllers/SessionController";
@@ -47,13 +47,14 @@ const storage = multer.memoryStorage({
     callback(null, "");
   },
 });
+
 const file = multer({ storage }).single("file");
 
 router.get("/users", userController.list);
 router.get("/users/:id", userController.show);
 router.put("/users/:id", userController.update);
 router.post("/users", userController.create);
-router.post("/users/image/:id", file, userController.sendImg);
+router.put("/users/:id/image", file, userController.updatePicture);
 
 /**
  * Lists routes
