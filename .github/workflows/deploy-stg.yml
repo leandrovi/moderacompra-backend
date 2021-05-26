@@ -17,12 +17,16 @@ jobs:
       - name: Create .env file
         run: |
           touch .env
-          echo NODE_ENV=production
+          echo NODE_ENV=production >> .env
           echo APP_SECRET=${{ secrets.APP_SECRET }} >> .env
           echo DB_HOST=${{ secrets.DB_HOST_STG }} >> .env
           echo DB_USER=${{ secrets.DB_USER_STG }} >> .env
           echo DB_PASS=${{ secrets.DB_PASS_STG }} >> .env
           echo DB_NAME=${{ secrets.DB_NAME_STG }} >> .env
+          echo AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} >> .env
+          echo AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} >> .env
+          echo AWS_BUCKET_NAME=${{ secrets.AWS_BUCKET_NAME }} >> .env
+          echo AWS_DEFAULT_REGION=${{ secrets.AWS_DEFAULT_REGION }} >> .env
           cat .env
 
       - name: Deploy backend to heroku (stg)

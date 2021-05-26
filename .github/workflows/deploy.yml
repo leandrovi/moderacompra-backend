@@ -23,6 +23,10 @@ jobs:
           echo DB_USER=${{ secrets.DB_USER_PROD }} >> .env
           echo DB_PASS=${{ secrets.DB_PASS_PROD }} >> .env
           echo DB_NAME=${{ secrets.DB_NAME_PROD }} >> .env
+          echo AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} >> .env
+          echo AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} >> .env
+          echo AWS_BUCKET_NAME=${{ secrets.AWS_BUCKET_NAME }} >> .env
+          echo AWS_DEFAULT_REGION=${{ secrets.AWS_DEFAULT_REGION }} >> .env
           cat .env
 
       - name: Deploy backend to heroku
