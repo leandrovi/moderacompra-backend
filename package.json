@@ -42,7 +42,8 @@
     "promisify": "^0.0.3",
     "sequelize": "^6.6.1",
     "sequelize-cli": "^6.2.0",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "yup": "^0.32.9"
   },
   "devDependencies": {
     "@types/express": "^4.17.11",
