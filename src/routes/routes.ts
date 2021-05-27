@@ -33,7 +33,7 @@ router.get("/health", (req, res) => {
 
 router.post("/sessions", sessionController.authenticate);
 
-//router.use(authMiddleware);
+router.use(authMiddleware);
 
 /**
  * Routes that need authentication
