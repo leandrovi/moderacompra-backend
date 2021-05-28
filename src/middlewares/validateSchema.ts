@@ -1,13 +1,22 @@
-export default class SchemaValidation {
-  public validateDto(schema) {
-    return async (req, res, next) => {
-      try {
-        const validatedBody = await schema.validate(req.body);
-        req.body = validatedBody;
-        next();
-      } catch (err) {
-        res.status(400).json(err);
-      }
-    };
-  }
+import { Request, Response, NextFunction } from "express";
+import { object, string } from "yup";
+import { ObjectShape, OptionalObjectSchema } from "yup/lib/object";
+
+export function validate(schema: OptionalObjectSchema<ObjectShape>) {
+  return async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const newSchema =
+        req.method === "POST"
+          ? schema
+          : schema.concat(object({ id: string().required() }));
+
+      req.body = await newSchema
+        .camelCase()
+        .validate(req.body, { abortEarly: false, stripUnknown: true });
+
+      next();
+    } catch (err) {
+      res.status(400).json(err);
+    }
+  };
 }

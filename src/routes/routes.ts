@@ -8,6 +8,8 @@ import ProductController from "../controllers/ProductController";
 import ProductQuantityController from "../controllers/ProductQuantityController";
 import authMiddleware from "../middlewares/auth";
 import ScrapController from "../controllers/ScrapController";
+import { validate } from "../middlewares/validateSchema";
+import { userSchema } from "../schemas/userSchema";
 
 const router = express.Router();
 
@@ -52,8 +54,8 @@ const file = multer({ storage }).single("file");
 
 router.get("/users", userController.list);
 router.get("/users/:id", userController.show);
-router.put("/users/:id", userController.update);
-router.post("/users", userController.create);
+router.put("/users/:id", validate(userSchema), userController.update);
+router.post("/users", validate(userSchema), userController.create);
 router.put("/users/:id/image", file, userController.updatePicture);
 
 /**
