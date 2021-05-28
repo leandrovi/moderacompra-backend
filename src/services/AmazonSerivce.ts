@@ -19,6 +19,8 @@ export default class AmazonService {
       Bucket: awsConfig.AWS_BUCKET_NAME,
       Key: `${uuidv4()}.${fileType}`,
       Body: file.buffer,
+      ContentType: file.mimetype,
+      ACL: "public-read",
     };
 
     const fileData = await s3.upload(params).promise();
