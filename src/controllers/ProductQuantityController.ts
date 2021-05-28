@@ -38,6 +38,30 @@ export default class ProductQuantityController {
     }
   }
 
+  public async getAllByList(request: Request, response: Response) {
+    console.log("aoba");
+    try {
+      const list_id = request.params.id;
+
+      const orderby = request.query.order
+        ? [request.query.order.toString().split(",")]
+        : null;
+
+      const options: RequestOptions = {
+        limit: Number(request.query.limit) || 20,
+        offset: Number(request.query.offset) || 0,
+        order: orderby,
+      };
+
+      const productQtt = await service.getAll(options, { list_id });
+
+      return response.status(200).json(productQtt);
+    } catch (err) {
+      console.log(err);
+      return response.status(500).json({ error: "Internal server error" });
+    }
+  }
+
   public async show(request: Request, response: Response) {
     try {
       const { id } = request.params;

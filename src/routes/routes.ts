@@ -84,6 +84,10 @@ router.put("/product-quantities/close", productQuantityController.close);
 router.post("/product-quantities", productQuantityController.create);
 router.post("/product-quantities/batch", productQuantityController.createBatch);
 router.delete("/product-quantities/:id", productQuantityController.delete);
+router.get(
+  "/product-quantities/lists/:id",
+  productQuantityController.getAllByList
+);
 
 /*
  * Scrap routes
