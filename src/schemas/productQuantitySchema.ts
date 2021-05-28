@@ -6,5 +6,8 @@ export const productQuantitySchema = object({
   initial_quantity: number().optional(),
   final_quantity: number().optional(),
   suggestion_quantity: number().optional(),
-  unity: string().optional(),
+  unity: object({
+    id: string().optional(),
+    description: string().optional(),
+  }),
 });

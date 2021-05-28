@@ -10,9 +10,10 @@ export function validate(schema: OptionalObjectSchema<ObjectShape>) {
           ? schema
           : schema.concat(object({ id: string().required() }));
 
-      req.body = await newSchema
-        .camelCase()
-        .validate(req.body, { abortEarly: false, stripUnknown: true });
+      req.body = await newSchema.validate(req.body, {
+        abortEarly: false,
+        stripUnknown: false,
+      });
 
       next();
     } catch (err) {
