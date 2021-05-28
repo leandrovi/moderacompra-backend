@@ -9,7 +9,7 @@ import ProductQuantityController from "../controllers/ProductQuantityController"
 import authMiddleware from "../middlewares/auth";
 import ScrapController from "../controllers/ScrapController";
 import { validate } from "../middlewares/validateSchema";
-import { userSchema } from "../schemas/userSchema";
+import Schemas from "../schemas/index";
 
 const router = express.Router();
 
@@ -33,7 +33,11 @@ router.get("/health", (req, res) => {
   return res.status(200).json({ timeCheck: timeStamp });
 });
 
-router.post("/sessions", sessionController.authenticate);
+router.post(
+  "/sessions",
+  validate(Schemas.sessionSchema),
+  sessionController.authenticate
+);
 
 router.use(authMiddleware);
 
@@ -54,8 +58,8 @@ const file = multer({ storage }).single("file");
 
 router.get("/users", userController.list);
 router.get("/users/:id", userController.show);
-router.put("/users/:id", validate(userSchema), userController.update);
-router.post("/users", validate(userSchema), userController.create);
+router.put("/users/:id", validate(Schemas.userSchema), userController.update);
+router.post("/users", validate(Schemas.userSchema), userController.create);
 router.put("/users/:id/image", file, userController.updatePicture);
 
 /**
@@ -63,16 +67,24 @@ router.put("/users/:id/image", file, userController.updatePicture);
  */
 router.get("/lists", listController.list);
 router.get("/lists/:id", listController.show);
-router.put("/lists/:id", listController.update);
-router.post("/lists", listController.create);
+router.put("/lists/:id", validate(Schemas.listSchema), listController.update);
+router.post("/lists", validate(Schemas.listSchema), listController.create);
 
 /**
  * Products routes
  */
 router.get("/products", productController.list);
 router.get("/products/:id", productController.show);
-router.put("/products/:id", productController.update);
-router.post("/products", productController.create);
+router.put(
+  "/products/:id",
+  validate(Schemas.productSchema),
+  productController.update
+);
+router.post(
+  "/products",
+  validate(Schemas.productSchema),
+  productController.create
+);
 router.post("/products/batch", productController.createBatch);
 router.delete("/products/:id", productController.delete);
 
@@ -81,9 +93,21 @@ router.delete("/products/:id", productController.delete);
  */
 router.get("/product-quantities", productQuantityController.list);
 router.get("/product-quantities/:id", productQuantityController.show);
-router.put("/product-quantities/:id", productQuantityController.update);
-router.put("/product-quantities/close", productQuantityController.close);
-router.post("/product-quantities", productQuantityController.create);
+router.put(
+  "/product-quantities/:id",
+  validate(Schemas.productQuantitySchema),
+  productQuantityController.update
+);
+router.put(
+  "/product-quantities/close",
+  validate(Schemas.productQuantitySchema),
+  productQuantityController.close
+);
+router.post(
+  "/product-quantities",
+  validate(Schemas.productQuantitySchema),
+  productQuantityController.create
+);
 router.post("/product-quantities/batch", productQuantityController.createBatch);
 router.delete("/product-quantities/:id", productQuantityController.delete);
 
