@@ -58,8 +58,11 @@ const file = multer({ storage }).single("file");
 
 router.get("/users", userController.list);
 router.get("/users/:id", userController.show);
-router.put("/users/:id", validate(Schemas.userSchema), userController.update);
-router.post("/users", validate(Schemas.userSchema), userController.create);
+router.put(
+  "/users/:id",
+  /*validate(Schemas.userSchema),*/ userController.update
+);
+router.post("/users", /*validate(Schemas.userSchema),*/ userController.create);
 router.put("/users/:id/image", file, userController.updatePicture);
 
 /**
@@ -67,8 +70,11 @@ router.put("/users/:id/image", file, userController.updatePicture);
  */
 router.get("/lists", listController.list);
 router.get("/lists/:id", listController.show);
-router.put("/lists/:id", validate(Schemas.listSchema), listController.update);
-router.post("/lists", validate(Schemas.listSchema), listController.create);
+router.put(
+  "/lists/:id",
+  /* validate(Schemas.listSchema),*/ listController.update
+);
+router.post("/lists", /*validate(Schemas.listSchema),*/ listController.create);
 
 /**
  * Products routes
@@ -77,12 +83,12 @@ router.get("/products", productController.list);
 router.get("/products/:id", productController.show);
 router.put(
   "/products/:id",
-  validate(Schemas.productSchema),
+  // validate(Schemas.productSchema),
   productController.update
 );
 router.post(
   "/products",
-  validate(Schemas.productSchema),
+  // validate(Schemas.productSchema),
   productController.create
 );
 router.post("/products/batch", productController.createBatch);
@@ -95,17 +101,17 @@ router.get("/product-quantities", productQuantityController.list);
 router.get("/product-quantities/:id", productQuantityController.show);
 router.put(
   "/product-quantities/:id",
-  validate(Schemas.productQuantitySchema),
+  // validate(Schemas.productQuantitySchema),
   productQuantityController.update
 );
 router.put(
   "/product-quantities/close",
-  validate(Schemas.productQuantitySchema),
+  // validate(Schemas.productQuantitySchema),
   productQuantityController.close
 );
 router.post(
   "/product-quantities",
-  validate(Schemas.productQuantitySchema),
+  // validate(Schemas.productQuantitySchema),
   productQuantityController.create
 );
 router.post("/product-quantities/batch", productQuantityController.createBatch);
