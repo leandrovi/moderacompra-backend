@@ -33,6 +33,9 @@ router.get("/health", (req, res) => {
   return res.status(200).json({ timeCheck: timeStamp });
 });
 
+//Create user
+router.post("/users", /*validate(Schemas.userSchema),*/ userController.create);
+
 router.post(
   "/sessions",
   validate(Schemas.sessionSchema),
@@ -62,7 +65,7 @@ router.put(
   "/users/:id",
   /*validate(Schemas.userSchema),*/ userController.update
 );
-router.post("/users", /*validate(Schemas.userSchema),*/ userController.create);
+
 router.put("/users/:id/image", file, userController.updatePicture);
 
 /**
