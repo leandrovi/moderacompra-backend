@@ -110,6 +110,10 @@ router.post(
 );
 router.post("/product-quantities/batch", productQuantityController.createBatch);
 router.delete("/product-quantities/:id", productQuantityController.delete);
+router.get(
+  "/product-quantities/lists/:id",
+  productQuantityController.getAllByList
+);
 
 /*
  * Scrap routes
