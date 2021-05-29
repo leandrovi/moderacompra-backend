@@ -13,7 +13,7 @@ export default class ListService {
 
     const list = await this.repository.create({
       user_id,
-      id_status: isFirstList ? 2 : id_status,
+      id_status: isFirstList ? 1 : id_status,
     });
 
     return list;
