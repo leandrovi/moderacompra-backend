@@ -77,12 +77,12 @@ router.get("/products", productController.list);
 router.get("/products/:id", productController.show);
 router.put(
   "/products/:id",
-  validate(Schemas.productSchema),
+  // validate(Schemas.productSchema),
   productController.update
 );
 router.post(
   "/products",
-  validate(Schemas.productSchema),
+  // validate(Schemas.productSchema),
   productController.create
 );
 router.post("/products/batch", productController.createBatch);
@@ -95,17 +95,17 @@ router.get("/product-quantities", productQuantityController.list);
 router.get("/product-quantities/:id", productQuantityController.show);
 router.put(
   "/product-quantities/:id",
-  validate(Schemas.productQuantitySchema),
+  // validate(Schemas.productQuantitySchema),
   productQuantityController.update
 );
 router.put(
   "/product-quantities/close",
-  validate(Schemas.productQuantitySchema),
+  // validate(Schemas.productQuantitySchema),
   productQuantityController.close
 );
 router.post(
   "/product-quantities",
-  validate(Schemas.productQuantitySchema),
+  // validate(Schemas.productQuantitySchema),
   productQuantityController.create
 );
 router.post("/product-quantities/batch", productQuantityController.createBatch);
