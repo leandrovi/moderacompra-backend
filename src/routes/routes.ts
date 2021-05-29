@@ -58,8 +58,11 @@ const file = multer({ storage }).single("file");
 
 router.get("/users", userController.list);
 router.get("/users/:id", userController.show);
-router.put("/users/:id", validate(Schemas.userSchema), userController.update);
-router.post("/users", validate(Schemas.userSchema), userController.create);
+router.put(
+  "/users/:id",
+  /*validate(Schemas.userSchema),*/ userController.update
+);
+router.post("/users", /*validate(Schemas.userSchema),*/ userController.create);
 router.put("/users/:id/image", file, userController.updatePicture);
 
 /**
@@ -67,8 +70,11 @@ router.put("/users/:id/image", file, userController.updatePicture);
  */
 router.get("/lists", listController.list);
 router.get("/lists/:id", listController.show);
-router.put("/lists/:id", validate(Schemas.listSchema), listController.update);
-router.post("/lists", validate(Schemas.listSchema), listController.create);
+router.put(
+  "/lists/:id",
+  /* validate(Schemas.listSchema),*/ listController.update
+);
+router.post("/lists", /*validate(Schemas.listSchema),*/ listController.create);
 
 /**
  * Products routes
