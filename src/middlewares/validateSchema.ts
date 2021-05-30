@@ -17,7 +17,8 @@ export function validate(schema: OptionalObjectSchema<ObjectShape>) {
 
       next();
     } catch (err) {
-      res.status(400).json(err);
+      console.log(err);
+      res.status(400).json({ errorMessage: err.message });
     }
   };
 }
