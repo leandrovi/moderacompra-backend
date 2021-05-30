@@ -1,5 +1,5 @@
 import { object, string } from "yup";
 
 export const productSchema = object({
-  name: string().required().min(2),
+  name: string().required().min(3),
 });
