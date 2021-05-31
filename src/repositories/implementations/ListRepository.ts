@@ -61,15 +61,4 @@ export default class ListRepository extends BaseRepository<ListEntity> {
       ],
     });
   }
-
-  async create(item: Partial<ListEntity>): Promise<ListEntity> {
-    return await List.create(item, {
-      include: [
-        {
-          model: Status,
-          as: "status",
-        },
-      ],
-    });
-  }
 }
