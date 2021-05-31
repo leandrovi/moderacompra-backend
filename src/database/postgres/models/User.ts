@@ -64,9 +64,6 @@ User.init(
   },
   {
     sequelize: database.connection,
-    defaultScope: {
-      attributes: { exclude: ["password_hash"] },
-    },
   }
 );
 
