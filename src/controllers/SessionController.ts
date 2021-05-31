@@ -13,9 +13,9 @@ export default class SessionController {
     try {
       const { email, password }: Partial<UserEntity> = request.body;
 
-      const auth = await service.authenticate({ email, password });
+      const { id, token } = await service.authenticate({ email, password });
 
-      return response.json({ token: auth });
+      return response.json({ id, token });
     } catch (err) {
       console.error(err);
       if (err == "401") {

@@ -9,7 +9,9 @@ const repository = new UserRepository();
 const service = new UserService(repository);
 
 export default class SessionService {
-  public async authenticate(userData: Partial<UserEntity>): Promise<string> {
+  public async authenticate(
+    userData: Partial<UserEntity>
+  ): Promise<{ id: string; token: string }> {
     const user = await service.getByEmail(userData.email);
     const isValidPassword = await bcrypt.compare(
       userData.password,
@@ -24,6 +26,6 @@ export default class SessionService {
       expiresIn: authConfig.expiresIn,
     });
 
-    return token;
+    return { id: user.id, token };
   }
 }

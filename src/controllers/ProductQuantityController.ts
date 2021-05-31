@@ -39,7 +39,6 @@ export default class ProductQuantityController {
   }
 
   public async getAllByList(request: Request, response: Response) {
-    console.log("aoba");
     try {
       const list_id = request.params.id;
 
@@ -131,18 +130,32 @@ export default class ProductQuantityController {
     }
   }
 
-  public async close(request: Request, response: Response) {
+  public async updateBatch(request: Request, response: Response) {
     try {
-      const productQttList: ProductQuantityEntity[] = request.body;
+      const productQuantities: ProductQuantityEntity[] = request.body;
 
-      const updatedProductQttList = await service.updateBatch(productQttList);
-
-      const newProductQuantities = await service.updateSuggestion(
-        updatedProductQttList
+      const updatedProductQuantities = await service.updateBatch(
+        productQuantities
       );
 
-      return response.json(newProductQuantities);
+      return response.json(updatedProductQuantities);
     } catch (err) {
+      console.log(err);
+      return response.status(500).json({ error: "Internal server error" });
+    }
+  }
+
+  public async close(request: Request, response: Response) {
+    try {
+      const productQuantities: ProductQuantityEntity[] = request.body;
+
+      const completeProductQuantities = await service.updateSuggestion(
+        productQuantities
+      );
+
+      return response.json(completeProductQuantities);
+    } catch (err) {
+      console.log(err);
       return response.status(500).json({ error: "Internal server error" });
     }
   }

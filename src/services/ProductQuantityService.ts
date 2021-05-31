@@ -87,13 +87,16 @@ export default class ProductService {
         productQuantity.id
       );
 
-      if (exists) {
-        const updatedProductQtt = await this.productQuantityRepository.update(
-          productQuantity.id,
-          productQuantity
-        );
-        productQuantities.push(updatedProductQtt);
+      if (!exists) {
+        continue;
       }
+
+      const updatedProductQtt = await this.productQuantityRepository.update(
+        productQuantity.id,
+        productQuantity
+      );
+
+      productQuantities.push(updatedProductQtt);
     }
 
     return productQuantities;
@@ -111,6 +114,8 @@ export default class ProductService {
       const suggestion = consumed - final;
 
       suggestionQttList.push({
+        id: productQuantity.id,
+        final_quantity: productQuantity.final_quantity,
         suggestion_quantity: suggestion,
       });
     }

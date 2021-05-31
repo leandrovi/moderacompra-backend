@@ -24,6 +24,11 @@ const scrapController = new ScrapController();
  * Open Routes without authentication
  */
 
+router.use((req, res, next) => {
+  console.log("\n*****REQUEST: ", req.path);
+  next();
+});
+
 // Health Check
 router.get("/health", (req, res) => {
   const currentDate = new Date().toLocaleDateString("en-us");
@@ -103,14 +108,19 @@ router.delete("/products/:id", productController.delete);
 router.get("/product-quantities", productQuantityController.list);
 router.get("/product-quantities/:id", productQuantityController.show);
 router.put(
-  "/product-quantities/:id",
-  // validate(Schemas.productQuantitySchema),
-  productQuantityController.update
-);
-router.put(
   "/product-quantities/close",
   // validate(Schemas.productQuantitySchema),
   productQuantityController.close
+);
+router.put(
+  "/product-quantities/batch",
+  // validate(Schemas.productQuantitySchema),
+  productQuantityController.updateBatch
+);
+router.put(
+  "/product-quantities/:id",
+  // validate(Schemas.productQuantitySchema),
+  productQuantityController.update
 );
 router.post(
   "/product-quantities",
