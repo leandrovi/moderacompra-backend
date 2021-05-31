@@ -13,7 +13,8 @@ interface UserCreationAttributes
 // Define the attributes and methods
 class User
   extends Model<UserEntity, UserCreationAttributes>
-  implements UserEntity {
+  implements UserEntity
+{
   public id: string;
   public name: string;
   public email: string;
@@ -63,18 +64,18 @@ User.init(
   },
   {
     sequelize: database.connection,
+    defaultScope: {
+      attributes: { exclude: ["password_hash"] },
+    },
   }
 );
 
 // Dealing with custom actions on hooks
-User.addHook(
-  "beforeSave",
-  async (user: User): Promise<void> => {
-    if (user.password) {
-      user.password_hash = await bcrypt.hash(user.password, 8);
-    }
+User.addHook("beforeSave", async (user: User): Promise<void> => {
+  if (user.password) {
+    user.password_hash = await bcrypt.hash(user.password, 8);
   }
-);
+});
 
 User.addHook("beforeCreate", (user: User): void => {
   user.id = uuidv4();
