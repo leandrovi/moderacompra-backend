@@ -31,19 +31,4 @@ export default class ProductQuantityRepository extends BaseRepository<ProductQua
       ],
     });
   }
-
-  async create(item: ProductQuantityEntity): Promise<ProductQuantityEntity> {
-    return await ProductQuantity.create(item, {
-      include: [
-        {
-          model: Unity,
-          as: "unity",
-        },
-        {
-          model: Product,
-          as: "product",
-        },
-      ],
-    });
-  }
 }

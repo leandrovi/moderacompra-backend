@@ -120,8 +120,6 @@ export default class ProductService {
       });
     }
 
-    console.log("Suggestions to be used:", suggestionQttList);
-
     return await this.updateBatch(suggestionQttList);
   }
 
