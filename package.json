@@ -6,19 +6,15 @@
   "type": "commonjs",
   "scripts": {
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts",
-
     "migration:create": "npx sequelize-cli migration:generate --name",
     "migration:run": "npx sequelize-cli db:migrate",
     "migration:undo": "npx sequelize-cli db:migrate:undo",
-
     "seed:create": "npx sequelize-cli seed:generate --name",
     "seed:run": "npx sequelize-cli db:seed:all",
     "seed:undo": "npx sequelize-cli db:seed:undo:all",
-
     "postinstall": "tsc",
     "watch-node": "nodemon dist/index.js",
     "watch-ts": "tsc -w",
-
     "heroku-prebuild": "npm install pm2 -g",
     "start": "pm2-runtime start ./dist/server.js --env production"
   },
@@ -26,9 +22,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.16.0",
+    "@aws-sdk/node-http-handler": "^3.3.0",
+    "@aws-sdk/types": "^3.3.0",
     "@types/bcrypt": "^3.0.0",
     "@types/jsonwebtoken": "^8.5.1",
     "@types/uuid": "^8.3.0",
+    "aws-sdk": "^2.912.0",
     "axios": "^0.21.1",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
@@ -36,12 +36,14 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
+    "multer": "^1.4.2",
     "pg": "^8.5.1",
     "pg-hstore": "^2.3.3",
     "promisify": "^0.0.3",
     "sequelize": "^6.6.1",
     "sequelize-cli": "^6.2.0",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "yup": "^0.32.9"
   },
   "devDependencies": {
     "@types/express": "^4.17.11",

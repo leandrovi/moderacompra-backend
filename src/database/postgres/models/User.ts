@@ -13,13 +13,15 @@ interface UserCreationAttributes
 // Define the attributes and methods
 class User
   extends Model<UserEntity, UserCreationAttributes>
-  implements UserEntity {
+  implements UserEntity
+{
   public id: string;
   public name: string;
   public email: string;
   public password: string;
   public password_hash: string;
   public id_behaviour: string;
+  public picture: string;
 
   public readonly created_at?: Date;
   public readonly updated_at?: Date;
@@ -55,6 +57,10 @@ User.init(
       type: Sequelize.STRING,
       allowNull: true,
     },
+    picture: {
+      type: Sequelize.STRING,
+      allowNull: true,
+    },
   },
   {
     sequelize: database.connection,
@@ -62,14 +68,11 @@ User.init(
 );
 
 // Dealing with custom actions on hooks
-User.addHook(
-  "beforeSave",
-  async (user: User): Promise<void> => {
-    if (user.password) {
-      user.password_hash = await bcrypt.hash(user.password, 8);
-    }
+User.addHook("beforeSave", async (user: User): Promise<void> => {
+  if (user.password) {
+    user.password_hash = await bcrypt.hash(user.password, 8);
   }
-);
+});
 
 User.addHook("beforeCreate", (user: User): void => {
   user.id = uuidv4();

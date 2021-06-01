@@ -77,6 +77,52 @@ export default class ProductService {
     return await this.productQuantityRepository.update(id, fields);
   }
 
+  public async updateBatch(
+    productQttToUpdate: Partial<ProductQuantityEntity>[]
+  ): Promise<ProductQuantityEntity[]> {
+    const productQuantities: ProductQuantityEntity[] = [];
+
+    for (const productQuantity of productQttToUpdate) {
+      const exists = await this.productQuantityRepository.findById(
+        productQuantity.id
+      );
+
+      if (!exists) {
+        continue;
+      }
+
+      const updatedProductQtt = await this.productQuantityRepository.update(
+        productQuantity.id,
+        productQuantity
+      );
+
+      productQuantities.push(updatedProductQtt);
+    }
+
+    return productQuantities;
+  }
+
+  public async updateSuggestion(
+    suggestionToUpdate: ProductQuantityEntity[]
+  ): Promise<ProductQuantityEntity[]> {
+    const suggestionQttList: Partial<ProductQuantityEntity>[] = [];
+
+    for (const productQuantity of suggestionToUpdate) {
+      const initial = productQuantity.initial_quantity;
+      const final = productQuantity.final_quantity;
+      const consumed = initial - final;
+      const suggestion = consumed - final;
+
+      suggestionQttList.push({
+        id: productQuantity.id,
+        final_quantity: productQuantity.final_quantity,
+        suggestion_quantity: suggestion,
+      });
+    }
+
+    return await this.updateBatch(suggestionQttList);
+  }
+
   public async delete(id: string): Promise<boolean> {
     const exists = await this.productQuantityRepository.findById(id);
 

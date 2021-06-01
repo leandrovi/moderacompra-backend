@@ -38,6 +38,29 @@ export default class ProductQuantityController {
     }
   }
 
+  public async getAllByList(request: Request, response: Response) {
+    try {
+      const list_id = request.params.id;
+
+      const orderby = request.query.order
+        ? [request.query.order.toString().split(",")]
+        : null;
+
+      const options: RequestOptions = {
+        limit: Number(request.query.limit) || 20,
+        offset: Number(request.query.offset) || 0,
+        order: orderby,
+      };
+
+      const productQtt = await service.getAll(options, { list_id });
+
+      return response.status(200).json(productQtt);
+    } catch (err) {
+      console.log(err);
+      return response.status(500).json({ error: "Internal server error" });
+    }
+  }
+
   public async show(request: Request, response: Response) {
     try {
       const { id } = request.params;
@@ -103,6 +126,36 @@ export default class ProductQuantityController {
 
       return response.json(productQtt);
     } catch (err) {
+      return response.status(500).json({ error: "Internal server error" });
+    }
+  }
+
+  public async updateBatch(request: Request, response: Response) {
+    try {
+      const productQuantities: ProductQuantityEntity[] = request.body;
+
+      const updatedProductQuantities = await service.updateBatch(
+        productQuantities
+      );
+
+      return response.json(updatedProductQuantities);
+    } catch (err) {
+      console.log(err);
+      return response.status(500).json({ error: "Internal server error" });
+    }
+  }
+
+  public async close(request: Request, response: Response) {
+    try {
+      const productQuantities: ProductQuantityEntity[] = request.body;
+
+      const completeProductQuantities = await service.updateSuggestion(
+        productQuantities
+      );
+
+      return response.json(completeProductQuantities);
+    } catch (err) {
+      console.log(err);
       return response.status(500).json({ error: "Internal server error" });
     }
   }

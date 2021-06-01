@@ -1,15 +1,9 @@
 import { Request, Response } from "express";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 
-import authConfig from "../config";
-
-import UserService from "../services/UserService";
-import UserRepository from "../repositories/implementations/UserRepository";
 import { UserEntity } from "../entities";
+import SessionService from "../services/SessionService";
 
-const repository = new UserRepository();
-const service = new UserService(repository);
+const service = new SessionService();
 
 export default class SessionController {
   public async authenticate(
@@ -19,24 +13,15 @@ export default class SessionController {
     try {
       const { email, password }: Partial<UserEntity> = request.body;
 
-      const user = await service.getByEmail(email);
+      const { id, token } = await service.authenticate({ email, password });
 
-      const isValidPassword = await bcrypt.compare(
-        password,
-        user.password_hash
-      );
-
-      if (!isValidPassword) {
+      return response.json({ id, token });
+    } catch (err) {
+      console.error(err);
+      if (err == "401") {
         return response.status(401).json({ error: "Invalid credentials" });
       }
 
-      const token = jwt.sign({ id: user.id }, authConfig.secret, {
-        expiresIn: authConfig.expiresIn,
-      });
-
-      return response.json({ token: token });
-    } catch (err) {
-      console.error(err);
       return response.status(500).json({ error: "Internal server error" });
     }
   }
